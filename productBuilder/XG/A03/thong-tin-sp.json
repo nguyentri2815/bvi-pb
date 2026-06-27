@@ -1,0 +1,71 @@
+{
+  "ProductName": "Xe ô tô đơn",
+  "ProductCode": "A02",
+  "BusinessName": "Xe cơ giới",
+  "BusinessCode": "XG",
+  "ProductTreeCode": "XG.2",
+  "IdQuote": "A02",
+  "IdPolicy": "A02",
+  "Display": true,
+  "Version": "OTO_DON_v7.0",
+  "Currency": "VND",
+  "GroupInsurance": "No",
+  "PricingApproach": "Individual",
+  "RenewalTime": "Sync",
+  "AllowUnderinsured": "Yes",
+  "AutoAccumulation": true,
+  "Options": {
+    "UseQuestionsPolicy": true,
+    "GeneralValidations": [
+      {
+        "value": "DC.context['Q']['isChangePrice'] === false && DC.context['G']['endorsementType'] === 1 &&  DC.context['G']['endorsementStatus'] === undefined ? true : false",
+        "message": "Chưa điều chỉnh thông tin liên quan tới phí. Vui lòng xem lại."
+      },
+      {
+        "value": "DC.context['P']['Price'] <= 0 && (Object.values(DC.context['GC']).length >=2) && DC.context['G']['endorsementType'] !== 5 && DC.context['G']['endorsementType'] !== 8",
+        "message": "Phải tham gia ít nhất 1 loại hình bảo hiểm"
+      }
+    ]
+  },
+  "Validations": [
+    {
+      "action": "saveLocal",
+      "message": "Chọn ít nhất 1 loại hình của TNDS tự nguyện",
+      "value": "DC.questions.GroupCover_XG_2_2 == true && (DC.questions.Cover_XG_2_2_1 == false && DC.questions.Cover_XG_2_2_2 == false && DC.questions.Cover_XG_2_2_3 == false && DC.questions.Cover_XG_2_3_4 == false)"
+    },
+    {
+      "value": "DC.questions.LoaiNguoiThuHuong == 'Người thụ hưởng chỉ định' ? (F.sumListExp(F.flatMap(IOS, 'item.NguoiDuocBaoHiem || []', 'item.TyLeThuHuongNguoiDuocBaoHiem || 0'),'item') == 100 ? false : true) : false",
+      "message": "Tổng tỷ lệ thụ hưởng của những người thụ hưởng phải bằng 100%",
+      "action": "saveLocal"
+    },
+    {
+      "value": "DC.context['Q']['isChangePrice'] === false && DC.context['G']['endorsementType'] === 1 &&  DC.context['G']['endorsementStatus'] === undefined ? true : false",
+      "message": "Chưa điều chỉnh thông tin liên quan tới phí. Vui lòng xem lại.",
+      "action": "saveLocal"
+    },
+    {
+      "value": "(Object.values(DC.context['GC']).length >=2) && DC.context['P']['Price'] <= 0 &&  DC.context['G']['endorsementType'] !== 5 && DC.context['G']['endorsementType'] !== 8",
+      "message": "Phải tham gia ít nhất 1 loại hình bảo hiểm",
+      "action": "saveLocal"
+    },
+    {
+      "value": "DC.context['GC']['GroupCover_XG_2_1'].Active && DC.context['GC']['GroupCover_XG_2_1'].DiscountType != 'none' && DC.context['GC']['GroupCover_XG_2_1'].Price <= 0 && F.isNil(DC.context['G']['endorsementType'])",
+      "messageExp": "`Phạm vi rủi ro ${DC.context['GC']['GroupCover_XG_2_1'].Name} có phí bằng 0`",
+      "action": "saveLocal",
+      "type": "multiple"
+    },
+    {
+      "value": "DC.context['GC']['GroupCover_XG_2_4'].Active && DC.context['GC']['GroupCover_XG_2_4'].DiscountType != 'none' && DC.context['GC']['GroupCover_XG_2_4'].Price <= 0 && F.isNil(DC.context['G']['endorsementType'])",
+      "messageExp": "`Phạm vi rủi ro ${DC.context['GC']['GroupCover_XG_2_4'].Name} có phí bằng 0`",
+      "action": "saveLocal",
+      "type": "multiple"
+    },
+    {
+      "value": "DC.context['Q']['isChangePaymentTerm'] == false && !F.isNil(DC.context['G']['endorsementType']) && DC.context['G']['endorsementType'] == 2 && DC.context['G']['endorsementStatus'] == undefined",
+      "message": "Bạn chưa điều chỉnh thông tin liên quan đến thời hạn bảo hiểm, tiếp tục lưu ?",
+      "action": "saveLocal",
+      "type": "confirm"
+    }
+  ],
+  "ProductDetailJsons": ""
+}

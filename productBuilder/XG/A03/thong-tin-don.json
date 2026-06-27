@@ -1,0 +1,1959 @@
+{
+  "Questions": [
+    {
+      "Code": "createDate",
+      "Name": "Ngày tạo",
+      "Type": "DateQuestion",
+      "UseInGroup": false,
+      "Default": "now"
+    },
+    {
+      "Code": "ClaimContractPercent",
+      "Name": "Tỷ lệ bồi thường",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false
+    },
+    {
+      "Code": "HangXe",
+      "Name": "Hãng xe",
+      "Type": "TextQuestion",
+      "Sortable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "carbrand",
+        "Mapping": "F.map(data,'name')"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "custom",
+          "Value": "!(G.customer?.customerCode == 'VANGLAI' || G?.customerModel?.classification == 0)  && Q.HangXe == 'KHAC'",
+          "Message": "Chỉ được sử dụng hãng xe 'KHÁC' cho khách hàng vãng lai"
+        }
+      ]
+    },
+    {
+      "Code": "TenChuXe",
+      "Name": "Tên Chủ Xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode && G?.customerModel? G.customerModel?.type ===0 ? G?.customerModel.name : G?.customerModel.organizationName : G.customer?.customerCode === 'VANGLAI' ? '': G.customer?.name",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SdtChuXe",
+      "Name": "Sđt chủ xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G?.customerModel? G?.customerModel?.phoneNumber :  G.customer?.customerCode === 'VANGLAI' ? '' : (G.customer?.phoneNumbers && G.customer?.phoneNumbers[0] ? G.customer?.phoneNumbers[0] : '')",
+      "Validations": [
+        {
+          "Type": "MinLength",
+          "Value": "10",
+          "Message": "Số điện thoại không được nhỏ hơn 10 ký tự"
+        }
+      ]
+    },
+    {
+      "Code": "EmailChuXe",
+      "Name": "Email chủ xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G?.customerModel? G?.customerModel?.email : G.customer?.customerCode === 'VANGLAI' ? '' : (G.customer?.emails && G.customer?.emails[0] ? G.customer?.emails[0] : '')",
+      "Validations": [
+        {
+          "Type": "Email",
+          "Message": "Email không đúng định dạng"
+        }
+      ]
+    },
+    {
+      "Code": "DiaChiChuXe",
+      "Name": "Địa chỉ",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode && G?.customerModel? G?.customerModel?.addressInfos?.address : G.customer?.customerCode === 'VANGLAI' ? '' : (G.customer?.addressInfos && G.customer?.addressInfos[0] && G.customer?.addressInfos[0].address ? G.customer?.addressInfos[0].address : '')"
+    },
+    {
+      "Code": "LaiXe",
+      "Name": "Lái xe",
+      "Type": "ArrayQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Items": [
+        {
+          "Code": "TenLaiXe",
+          "Name": "Tên lái xe",
+          "Type": "TextQuestion",
+          "Updatable": true,
+          "UseInGroup": false,
+          "Validations": [
+            {
+              "Type": "Required",
+              "Value": "true",
+              "Message": "Trường thông tin bắt buộc"
+            }
+          ]
+        },
+        {
+          "Code": "NgaySinhLaiXe",
+          "Name": "Ngày sinh",
+          "Type": "DateQuestion",
+          "Updatable": true,
+          "UseInGroup": false,
+          "Default": "G.packageCode ? G?.customerModel?.birthDate : null",
+          "Validations": [
+            {
+              "Type": "Required",
+              "Value": "true",
+              "Message": "Trường thông tin bắt buộc"
+            }
+          ]
+        },
+        {
+          "Code": "GioiTinhLaiXe",
+          "Name": "Giới tính lái xe",
+          "Type": "TextQuestion",
+          "Updatable": true,
+          "UseInGroup": false,
+          "Lookup": {
+            "Ref": "sex",
+            "Label": "item.name",
+            "Value": "item.name"
+          },
+          "Validations": [
+            {
+              "Type": "Required",
+              "Value": "true",
+              "Message": "Trường thông tin bắt buộc"
+            }
+          ]
+        },
+        {
+          "Code": "LoaiBangLaiXe",
+          "Name": "Loại bằng",
+          "Type": "TextQuestion",
+          "Updatable": true,
+          "UseInGroup": false,
+          "Lookup": {
+            "Ref": "banglaixe",
+            "Label": "item.name",
+            "Value": "item.name"
+          },
+          "Validations": [
+            {
+              "Type": "Required",
+              "Value": "true",
+              "Message": "Trường thông tin bắt buộc"
+            }
+          ]
+        },
+        {
+          "Code": "SoBangLaiXe",
+          "Name": "Số bằng lái",
+          "Type": "TextQuestion",
+          "Updatable": true,
+          "UseInGroup": false,
+          "Validations": [
+            {
+              "Type": "Required",
+              "Value": "true",
+              "Message": "Trường thông tin bắt buộc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Code": "HieuXe",
+      "Name": "Phiên bản",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "carmodel",
+        "Mapping": "F.filterIn(data,'code',F.filterEqual('cars',{'carbrand':F.convert('carbrand',Q.HangXe,'name','code')},'carmodel'),'name')"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "custom",
+          "Value": "!(G.customer?.customerCode == 'VANGLAI' || G?.customerModel?.classification == 0) && Q.HieuXe == 'KHAC'",
+          "Message": "Chỉ được sử dụng phiên bản 'KHÁC' cho khách hàng vãng lai"
+        }
+      ]
+    },
+    {
+      "Code": "NhomXe",
+      "Name": "Nhóm xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "cartype",
+        "Mapping": "F.distinct(F.filterIn(data,'code',F.filterEqual('cartypes',{'carmodel':F.convert('carmodel',Q.HieuXe,'name','code'),'carpurpose':F.convert('carpurpose',Q.MDSD,'name','code')},'cartype'),'parentname'))"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "KieuHopSo",
+      "Name": "Kiểu hộp số",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "G.quoteType === 2 || G.source === 'momo' ? Q.KieuHopSo:F.firstOrDefault(F.filterIn('geartype','code',F.filterEqual('cars',{'carmodel':F.convert('carmodel',Q.HieuXe,'name','code')},'geartype')),'name','')"
+        }
+      ]
+    },
+    {
+      "Code": "LoaiNhienLieu",
+      "Name": "Loại nhiên liệu",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "G.quoteType === 2 || G.source === 'momo' ? Q.LoaiNhienLieu: F.firstOrDefault(F.filterIn('fuel','code',F.filterEqual('cars',{'carmodel':F.convert('carmodel',Q.HieuXe,'name','code')},'fuel')),'name','')"
+        }
+      ]
+    },
+    {
+      "Code": "DungTich",
+      "Name": "Dung tích",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "G.quoteType === 2 || G.source === 'momo' ? Q.DungTich: F.firstOrDefault(F.filterIn('capacity','code',F.filterEqual('cars',{'carmodel':F.convert('carmodel',Q.HieuXe,'name','code')},'capacity')),'name','')"
+        }
+      ]
+    },
+    {
+      "Code": "SoCongToMet",
+      "Name": "Số công tơ mét",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false
+    },
+    {
+      "Code": "MDSD",
+      "Name": "Mục đích sử dụng",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "carpurpose",
+        "Label": "item.name",
+        "Value": "item.name"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "LoaiXe",
+      "Name": "Loại Xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "cartype",
+        "Mapping": "F.sort(F.distinct(F.filter(F.filterIn(data,'code',F.filterEqual('cartypes',{'carmodel':F.convert('carmodel',Q.HieuXe,'name','code'),'carpurpose': F.convert('carpurpose',Q.MDSD,'name','code')},'cartype')),'item.parentname==Q.NhomXe&&item.name!=\"Xe tải\"&&item.name!=\"Xe đông lạnh\"','name')))"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SoChoNgoi",
+      "Name": "Số chỗ ngồi",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.LoaiXe",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "seat_min",
+          "Value": "F.lookupCondition('sochongoi_min')"
+        },
+        {
+          "Type": "seat_max",
+          "Value": "F.lookupCondition('sochongoi_max')"
+        }
+      ]
+    },
+    {
+      "Code": "percentRenew",
+      "Name": "tỷ lệ tăng phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "0"
+    },
+    {
+      "Code": "TrongTai",
+      "Name": "Trọng tải",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "Q.NhomXe != 'Nhóm xe chở người'",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "lt",
+          "Value": "1000",
+          "Message": "Trọng tải tối đa 3 kí tự số"
+        },
+        {
+          "Type": "grosston",
+          "Value": "F.lookupCondition('validMinGrossTon')"
+        },
+        {
+          "Type": "custom",
+          "Value": "(Q.Cover_XG_2_3_4 && Q.NhomXe != 'Nhóm xe chở người') && (Q.TrongTai == 0) ? true : false",
+          "Message": "Trọng tải tham gia phải khác 0"
+        }
+      ]
+    },
+    {
+      "Code": "TuoiXe",
+      "Name": "Tuổi xe",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false
+    },
+    {
+      "Code": "isRenew",
+      "Name": "Tái tục",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false
+    },
+    {
+      "Code": "KieuGiayChungNhanBaoHiem",
+      "Name": "Kiểu giấy chứng nhận bảo hiểm",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode? 'Điện tử' : R.path == 'quote/policy-endorsement' ? (G.certificateElectronic == true ? 'Điện tử' : 'Truyền thống') : null",
+      "Lookup": {
+        "Ref": "KieuGiayChungNhanBaoHiem",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "R.path == 'quote/create' ? false : true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SoGCN",
+      "Name": "Số GCNBH",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "Q.KieuGiayChungNhanBaoHiem == 'Truyền thống' && R.path != 'quote/create'",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "NgayCapGCN",
+      "Name": "Ngày cấp GCNBH",
+      "Type": "DateQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode? Q.NgayBatDau : null"
+    },
+    {
+      "Code": "GiaTriXeThamKhao",
+      "Name": "Giá trị xe",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false
+    },
+    {
+      "Code": "GiaTriXe",
+      "Name": "Giá trị xe thực tế",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.GroupCover_XG_2_5 ? 1 : 0",
+          "Message": "Giá trị xe phải lớn hơn 0"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.GiaTriXe) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_5 === true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "custom",
+          "Value": "Q.GiaTriXe < 200000000 && !F.isEmpty(Q.packageCode) && Q.GroupCover_XG_2_5 ? true : false",
+          "Message": "Giá trị xe ít nhất 200,000,000"
+        }
+      ]
+    },
+    {
+      "Code": "DongXe",
+      "Name": "Dòng xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "carline",
+        "Mapping": "F.map(data,'name')"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "NoiSanXuat",
+      "Name": "Nơi sản xuất",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "NoiSanXuat",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_5 === true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "NgayDangKyDauTien",
+      "Name": "Ngày đăng ký đầu tiên",
+      "Type": "DateQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_5 === true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "gte",
+          "Value": "Q.NamSanXuat",
+          "Message": "Ngày đăng ký lần đầu không được nhỏ hơn năm sản xuất"
+        }
+      ]
+    },
+    {
+      "Code": "NamSanXuat",
+      "Name": "Năm sản xuất",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "NamSanXuat",
+        "Label": "item",
+        "Value": "item"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_5 === true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "BienSoXe",
+      "Name": "Biển số xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "MinLength",
+          "Value": "5",
+          "Message": "Biển kiểm soát bao gồm từ 5 đến 10 ký tự"
+        },
+        {
+          "Type": "MaxLength",
+          "Value": "F.isCoreSystem(G.source) ? 10 : 20",
+          "Message": "Biển kiểm soát bao gồm từ 5 đến 10 ký tự"
+        },
+        {
+          "Type": "Required",
+          "Value": "(F.convertDateVal(Q.NgayDangKyDauTien) < F.convertDateVal(Q.createDate))",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SoKhung",
+      "Name": "Số khung",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "MinLength",
+          "Value": "6",
+          "Message": "Số khung không được nhỏ hơn 6 ký tự"
+        },
+        {
+          "Type": "MaxLength",
+          "Value": "17",
+          "Message": "Số khung không được lớn hơn 17 ký tự"
+        },
+        {
+          "Type": "Required",
+          "Value": "F.convertDateVal(Q.NgayDangKyDauTien) >= F.convertDateVal(Q.createDate) && !Q.BienSoXe",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SoMay",
+      "Name": "Số máy",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "MinLength",
+          "Value": "6",
+          "Message": "Số máy không được nhỏ hơn 6 ký tự"
+        },
+        {
+          "Type": "Regex",
+          "Value": "'^[a-zA-Z0-9]{6,}$'",
+          "Message": "Sai định dạng số máy"
+        },
+        {
+          "Type": "Required",
+          "Value": "F.convertDateVal(Q.NgayDangKyDauTien) >= F.convertDateVal(Q.createDate) && !Q.BienSoXe",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "NgayBatDau",
+      "Name": "Ngày bắt đầu",
+      "Type": "DateQuestion",
+      "UseInGroup": false,
+      "Default": "G.productType==='SINGLE' ? F.dateVal(F.dateSetSecond(G.effectiveDate)) : F.dateVal(F.dateSetSecond(now))",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "lt",
+          "Value": "(G.endorsementType === 3 || G.endorsementType === 5) ? F.addDate(Q.NgayKetThuc,1,'day') : Q.NgayKetThuc",
+          "Message": "Ngày bắt đầu không được lớn hơn hoặc bằng ngày kết thúc"
+        },
+        {
+          "Type": "custom",
+          "Value": "G.packageCode && F.subDate(now,30,'minute') > Q.NgayBatDau",
+          "Message": "Ngày giờ bắt đầu không được nhỏ hơn ngày giờ hiện tại"
+        }
+      ]
+    },
+    {
+      "Code": "NgayKetThuc",
+      "Name": "Ngày kết thúc",
+      "Type": "DateQuestion",
+      "UseInGroup": false,
+      "Default": "G.packageCode ? F.subDate(F.addDate(Q.NgayBatDau, 1, 'year'),1,'minute') :   G.productType === 'SINGLE' ? F.dateVal(F.dateSetSecond(G.expirationDate)) : F.addDate(F.dateVal(F.dateSetSecond(now)),1,'years')",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "Min",
+          "Value": "(G.endorsementType === 3 || G.endorsementType === 5) ? F.subDate(Q.NgayBatDau,1,'day') : Q.NgayBatDau",
+          "Message": "Ngày kết thúc không được nhỏ hơn ngày bắt đầu"
+        },
+        {
+          "Type": "Min",
+          "Value": "G.endorsementEffectiveDate",
+          "Message": "Ngày kết thúc không được nhỏ hơn ngày hiệu lực của SĐBS"
+        },
+        {
+          "Type": "Min",
+          "Value": "G.haveActiveClaim === true ? F.getLatestActiveClaimDate(Q.SoGCN, G.claimProfile) : null",
+          "Message": "Ngày kết thúc không được nhỏ hơn ngày phát hành bồi thường"
+        },
+        {
+          "Type": "Min",
+          "Value": "Q.packageCode !=='' && Q.GroupCover_XG_2_1 ? F.subDate(F.addDate(Q.NgayBatDau,1,'year'),2,'minute') : Q.NgayBatDau",
+          "Message": "Ngày kết thúc không được nhỏ hơn 1 năm"
+        },
+        {
+          "Type": "Max",
+          "Value": "Q.packageCode !==''  && Q.GroupCover_XG_2_1 ?  F.addDate(F.addDate(Q.NgayBatDau,3,'year'),2,'minute') : null",
+          "Message": "Ngày kết thúc không được lớn hơn 3 năm"
+        }
+      ]
+    },
+    {
+      "Code": "LoaiChu",
+      "Name": "Loại chủ sở hữu",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.customer?.type === 0 || G.customerModel?.type ===0 ? 'Cá nhân' : 'Tổ chức'",
+      "Lookup": {
+        "Ref": "LoaiChu",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "TinhThanhChuXe",
+      "Name": "Tỉnh/Thành phố",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode && G?.customerModel? G?.customerModel?.addressInfos?.provinceName : G.customer?.customerCode === 'VANGLAI' ? '' : Fa.convert(Fa.lookup('provinces'),G.customer?.addressInfos[0]?.provinceId,'id','name')",
+      "Lookup": {
+        "Ref": "provinces",
+        "Label": "item.name",
+        "Value": "item.name"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "F.isCoreSystem(G.source) ? true : false",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "QuanHuyenChuXe",
+      "Name": "Quận/Huyện",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode && G?.customerModel? G?.customerModel?.addressInfos?.districtName : G.customer?.customerCode === 'VANGLAI' ? '' : Fa.convert(Fa.lookup('districts'),G.customer?.addressInfos[0]?.districtId,'id','name')",
+      "Lookup": {
+        "Ref": "districts",
+        "Label": "item.name",
+        "Value": "item.name"
+      }
+    },
+    {
+      "Code": "PhuongXaChuXe",
+      "Name": "Phường/Xã",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "G.packageCode && G?.customerModel? G?.customerModel?.addressInfos?.wardName : G.customer?.customerCode === 'VANGLAI' ? '' : Fa.convert(Fa.lookup('wards'),G.customer?.addressInfos[0]?.wardId,'id','name')",
+      "Lookup": {
+        "Ref": "wards",
+        "Label": "item.name",
+        "Value": "item.name"
+      }
+    },
+    {
+      "Code": "madein",
+      "Name": "Made in",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "F.convert('carbrand',Q.HangXe,'name','parentname')"
+        }
+      ]
+    },
+    {
+      "Code": "MauXe",
+      "Name": "Mầu xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Lookup": {
+        "Ref": "MauXe",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      }
+    },
+    {
+      "Code": "NgayKetThucGoc",
+      "Name": "Ngày kết thúc gốc",
+      "Type": "DateQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "F.addDate(now,1,'years')"
+    },
+    {
+      "Code": "isElectricCar",
+      "Name": "Ô tô điện ?",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false"
+    },
+    {
+      "Code": "includeBatteryValue",
+      "Name": "bao gồm giá trị pin",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.isElectricCar",
+      "Default": "false"
+    }
+  ],
+  "Covers": [
+    {
+      "Code": "Default_Discount_Renew",
+      "Name": "Giảm phí mặc định",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "0"
+    },
+    {
+      "Code": "GroupCover_XG_2_1",
+      "Name": "Bảo hiểm TNDS bắt buộc chủ xe ô tô",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "ES_XG_2_1",
+      "Name": "SĐBS TNDS chủ xe ô tô",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false"
+    },
+    {
+      "Code": "Tax_GroupCover_XG_2_1",
+      "Name": "Thuế TNDS bắt buộc",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_1",
+      "Default": "G.quoteKind == 3 || G.policyKind == 3 ? -1 : 10",
+      "Lookup": {
+        "Ref": "Thue",
+        "Label": "item.Condition",
+        "Value": "F.floatVal(item.Result,0)"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Discount_GroupCover_XG_2_1",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_1",
+      "Default": "0"
+    },
+    {
+      "Code": "Terminal_GroupCover_XG_2_1",
+      "Name": "Terminal_GroupCover_XG_2_1",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_GroupCover_XG_2_1",
+      "Name": "Tỷ lệ giảm",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_1",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "MTNNguoi_Cover_XG_2_1_1",
+      "Name": "MTN BT3 về người",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_1",
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "150000000"
+        },
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_1",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "MTNTaiSan_Cover_XG_2_1_2",
+      "Name": "MTN BT3 về tài sản",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_1",
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "100000000"
+        },
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_1",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "MTNKhach_Cover_XG_2_1_3",
+      "Name": "MTN về hành khách",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_1",
+      "Validations": [
+        {
+          "Type": "Equal",
+          "Value": "150000000"
+        },
+        {
+          "Type": "Required",
+          "Value": "Q.Cover_XG_2_1",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SoNguoiThamGia_GroupCover_XG_2_4",
+      "Name": "Số người tham gia",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "Q.SoChoNgoi",
+          "Message": "Số người tham gia không được vượt quá số chỗ ngồi"
+        },
+        {
+          "Type": "gt",
+          "Value": "0",
+          "Message": "Số người tham gia phải khác 0"
+        }
+      ]
+    },
+    {
+      "Code": "SumInsured_Cover_XG_2_2_1",
+      "Name": "MTN BT3 về người",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_1 ",
+      "Validations": [
+        {
+          "Type": "gt",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_2_1')? 0 : -1",
+          "Message": "Số tiền bảo hiểm phải lớn hơn 0"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.SumInsured_Cover_XG_2_2_1) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_2_1')",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Deductible_Cover_XG_2_2_1",
+      "Name": "MKT tự nguyện BT3 về người",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_1",
+      "Lookup": {
+        "Ref": "deductible",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      }
+    },
+    {
+      "Code": "SumInsured_Cover_XG_2_2_2",
+      "Name": "MTN BT3 về tài sản",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_2",
+      "Validations": [
+        {
+          "Type": "gt",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_2_2')?0:-1",
+          "Message": "Số tiền bảo hiểm phải lớn hơn 0"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.SumInsured_Cover_XG_2_2_2) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_2_2')",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Deductible_Cover_XG_2_2_2",
+      "Name": "MKT tự nguyện BT3 về tài sản",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_2",
+      "Lookup": {
+        "Ref": "deductible",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      }
+    },
+    {
+      "Code": "SumInsured_Cover_XG_2_2_3",
+      "Name": "MTN BT3 về hành khách",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_3",
+      "Validations": [
+        {
+          "Type": "gt",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_2_3') ? 0: -1",
+          "Message": "Số tiền bảo hiểm phải lớn hơn 0"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.SumInsured_Cover_XG_2_2_3) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_2_3')",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Deductible_Cover_XG_2_2_3",
+      "Name": "MKT tự nguyện BT3 về hành khách",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_3",
+      "Lookup": {
+        "Ref": "deductible",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      }
+    },
+    {
+      "Code": "STBH_Cover_XG_2_3_4",
+      "Name": "MTN về hàng hoá",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4",
+      "Validations": [
+        {
+          "Type": "gt",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_3_4') ? 0: -1",
+          "Message": "Số tiền bảo hiểm phải lớn hơn 0"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.STBH_Cover_XG_2_3_4) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "!F.checkHideCover('GroupCover_XG_2_2','Cover_XG_2_3_4')",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SoTanThamGia_Cover_XG_2_3_4",
+      "Name": "Số tấn tham gia",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4 && Q.NhomXe != 'Nhóm xe chở người'",
+      "Validations": [
+        {
+          "Type": "lte",
+          "Value": "Q.TrongTai",
+          "Message": "Số tấn tham gia không được lớn hơn trọng tải"
+        },
+        {
+          "Type": "gt",
+          "Value": "0",
+          "Message": "Số tấn tham gia phải khác 0"
+        },
+        {
+          "Type": "Required",
+          "Value": "Q.Cover_XG_2_3_4",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Deductible_Cover_XG_2_3_4",
+      "Name": "MKT tự nguyện BT3 về hàng hoá",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4"
+    },
+    {
+      "Code": "GroupCover_XG_2_2",
+      "Name": "Bảo hiểm TNDS tự nguyện chủ xe ô tô",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "ES_XG_2_2",
+      "Name": "SĐBS TNDS tự nguyện chủ xe ô tô",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false"
+    },
+    {
+      "Code": "Tax_GroupCover_XG_2_2",
+      "Name": "Thuế TNDS tự nguyện",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_2",
+      "Default": "G.quoteKind == 3 || G.policyKind == 3 ? -1 : 10",
+      "Lookup": {
+        "Ref": "Thue",
+        "Label": "item.Condition",
+        "Value": "F.floatVal(item.Result,0)"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_2_1",
+      "Name": "TNDS BT3 về người",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_2",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Terminal_Cover_XG_2_2_1",
+      "Name": "Terminal_Cover_XG_2_2_1",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_Cover_XG_2_2_1",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_1",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_Cover_XG_2_2_1",
+      "Name": "Tỷ lệ giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_1",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "TLP_Cover_XG_2_2_1",
+      "Name": "Tỷ lệ phí thanh toán",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_1",
+      "Default": "-999999",
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.TLP_Cover_XG_2_2_1 == -999999 ? -999999 : 0",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_2_2",
+      "Name": "TNDS BT3 về tài sản",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_2",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Terminal_Cover_XG_2_2_2",
+      "Name": "Terminal_Cover_XG_2_2_2",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_Cover_XG_2_2_2",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_2",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_Cover_XG_2_2_2",
+      "Name": "Tỷ lệ giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_2",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "TLP_Cover_XG_2_2_2",
+      "Name": "Tỷ lệ phí thanh toán",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_2",
+      "Default": "-999999",
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.TLP_Cover_XG_2_2_2 == -999999 ? -999999 : 0",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_2_3",
+      "Name": "TNDS với Hành khách",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_2",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Terminal_Cover_XG_2_2_3",
+      "Name": "Terminal_Cover_XG_2_2_3",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_3",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_Cover_XG_2_2_3",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_3",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_Cover_XG_2_2_3",
+      "Name": "Tỷ lệ giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_3",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "TLP_Cover_XG_2_2_3",
+      "Name": "Tỷ lệ phí thanh toán",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_2_3",
+      "Default": "-999999",
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.TLP_Cover_XG_2_2_3 == -999999 ? -999999 : 0",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_3_4",
+      "Name": "TNDS với hàng hóa vận chuyển trên xe",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_2",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Terminal_Cover_XG_2_3_4",
+      "Name": "Terminal_Cover_XG_2_3_4",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_Cover_XG_2_3_4",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_Cover_XG_2_3_4",
+      "Name": "Tỷ lệ giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "TLP_Cover_XG_2_3_4",
+      "Name": "Tỷ lệ phí thanh toán",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_3_4",
+      "Default": "-999999",
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.TLP_Cover_XG_2_3_4 == -999999 ? -999999 : 0",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "MucTrachNhiem_GroupCover_XG_2_4",
+      "Name": "MTN tai nạn LPX & NNTX",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Validations": [
+        {
+          "Type": "gt",
+          "Value": "!F.checkHideGC('GroupCover_XG_2_4')? 0 : -1",
+          "Message": "Số tiền bảo hiểm phải lớn hơn 0"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.MucTrachNhiem_GroupCover_XG_2_4) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "!F.checkHideGC('GroupCover_XG_2_4')",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Terminal_GroupCover_XG_2_4",
+      "Name": "Terminal_GroupCover_XG_2_4",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_GroupCover_XG_2_4",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_GroupCover_XG_2_4",
+      "Name": "Tỷ lệ giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "TLP_GroupCover_XG_2_4",
+      "Name": "Tỷ lệ phí thanh toán",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Default": "-999999",
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.TLP_GroupCover_XG_2_4 == -999999 ? -999999 : 0",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "Deductible_GroupCover_XG_2_4",
+      "Name": "MKT tai nạn LPX và NNTX",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Lookup": {
+        "Ref": "deductible",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      }
+    },
+    {
+      "Code": "GroupCover_XG_2_4",
+      "Name": "Bảo hiểm tai nạn LPX và NNTX",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "ES_XG_2_4",
+      "Name": "SDBS tai nạn lái phụ xe và người ngồi trên xe",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false"
+    },
+    {
+      "Code": "Tax_GroupCover_XG_2_4",
+      "Name": "Thuế TNDS tai nạn LPX & NNTX",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_4",
+      "Default": "-1",
+      "Lookup": {
+        "Ref": "Thue",
+        "Label": "item.Condition",
+        "Value": "F.floatVal(item.Result,0)"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "SumInsured_GroupCover_XG_2_5",
+      "Name": "MTN vật chất xe",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "Q.GiaTriXe",
+      "Validations": [
+        {
+          "Type": "gt",
+          "Value": "0",
+          "Message": "Số tiền bảo hiểm phải lớn hơn 0"
+        },
+        {
+          "Type": "Max",
+          "Value": "Q.GiaTriXe",
+          "Message": "Số tiền bảo hiểm không được vượt quá giá trị xe thực tế"
+        },
+        {
+          "Type": "gte",
+          "Value": "!F.checkSpecial(Q.SumInsured_GroupCover_XG_2_5) ? 1 : 0",
+          "Message": "Sai kiểu dữ liệu"
+        },
+        {
+          "Type": "Required",
+          "Value": "Q.GroupCover_XG_2_5",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "MucTrachNhiem_Cover_XG_2_5_9",
+      "Name": "MTN bổ sung 03",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_5_9 == true",
+      "Lookup": {
+        "Ref": "MucTrachNhiem_Cover_XG_2_5_9",
+        "Label": "F.formatNumber(item.Result)",
+        "Value": "F.textVal(item.Result)"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "Q.Cover_XG_2_5_9 === true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_14",
+      "Name": "Bảo hiểm pin",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "MucTrachNhiem_Cover_XG_2_5_14",
+      "Name": "MTN bổ sung 03",
+      "Type": "IntegerQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.Cover_XG_2_5_14 == true",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "Q.SumInsured_GroupCover_XG_2_5",
+          "Message": "STBH pin không vượt quá STBH VCX"
+        }
+      ]
+    },
+    {
+      "Code": "GroupCover_XG_2_5",
+      "Name": "Bảo hiểm thiệt hại vật chất xe",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        },
+        {
+          "Type": "custom",
+          "Value": "Q.GroupCover_XG_2_5 && G.customer?.customerCode === 'VANGLAI'",
+          "Message": "Khách hàng VÃNG LAI không được chọn loại hình Vật chất xe"
+        }
+      ]
+    },
+    {
+      "Code": "ES_XG_2_5",
+      "Name": "SDBS thiệt hại vật chất xe",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Default": "false"
+    },
+    {
+      "Code": "Tax_GroupCover_XG_2_5",
+      "Name": "Thuế bảo hiểm thiệt hại vật chất xe",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "G.quoteKind == 3 || G.policyKind == 3 ? -1 : 10",
+      "Lookup": {
+        "Ref": "Thue",
+        "Label": "item.Condition",
+        "Value": "F.floatVal(item.Result,0)"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Terminal_GroupCover_XG_2_5",
+      "Name": "Terminal_GroupCover_XG_2_5",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_GroupCover_XG_2_5",
+      "Name": "Giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "0"
+    },
+    {
+      "Code": "Discount_P_GroupCover_XG_2_5",
+      "Name": "Tỷ lệ giảm phí",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "0",
+      "Validations": [
+        {
+          "Type": "Max",
+          "Value": "100",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "TLP_GroupCover_XG_2_5",
+      "Name": "Tỷ lệ phí thanh toán",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "-999999",
+      "Validations": [
+        {
+          "Type": "Min",
+          "Value": "Q.TLP_GroupCover_XG_2_5 == -999999 ? -999999 : 0",
+          "Message": "Tỷ lệ giảm phí không được quá 100%"
+        }
+      ]
+    },
+    {
+      "Code": "Deductible_GroupCover_XG_2_5",
+      "Name": "MKT vật chất xe",
+      "Type": "TextQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Lookup": {
+        "Ref": "deductible",
+        "Label": "item.Result",
+        "Value": "item.Result"
+      },
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "(!F.isNil(G.packageCode) && F.isNil(G.endorsementType) && F.lookupCondition('Deductible_XG_2_5') == 0) ? false : true ",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_1",
+      "Name": "Phạm vi cơ bản",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_2",
+      "Name": "Bổ sung 01",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_3",
+      "Name": "Bổ sung 02",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_4",
+      "Name": "Bổ sung 04a",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_5",
+      "Name": "Bổ sung 04b",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_6",
+      "Name": "Bổ sung 07",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_7",
+      "Name": "Bổ sung 08",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_8",
+      "Name": "Bổ sung 10",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_9",
+      "Name": "Bổ sung 03",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_10",
+      "Name": "Bổ sung 05",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "false",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_11",
+      "Name": "Bổ sung 06",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_12",
+      "Name": "Bổ sung 09",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Validations": [
+        {
+          "Type": "Required",
+          "Value": "true",
+          "Message": "Trường thông tin bắt buộc"
+        }
+      ]
+    },
+    {
+      "Code": "Cover_XG_2_5_13",
+      "Name": "Bổ sung 10",
+      "Type": "BooleanQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5"
+    },
+    {
+      "Code": "Phi_Special",
+      "Name": "Phí Chuẩn (phí đặc biệt)",
+      "Type": "NumberQuestion",
+      "Updatable": true,
+      "UseInGroup": false,
+      "Condition": "Q.GroupCover_XG_2_5",
+      "Default": "0"
+    }
+  ]
+}
