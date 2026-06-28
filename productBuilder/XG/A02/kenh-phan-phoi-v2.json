@@ -107,11 +107,20 @@
               },
               {
                 "id": null,
-                "title": "Phiên bản",
+                "title": "Hiệu xe",
                 "ref": "HieuXe",
                 "sortable": true,
                 "className": "small-col-2 text-truncate text-center",
                 "headerClassName": "small-col-2 text-truncate text-center"
+              },
+              {
+                "id": null,
+                "title": "Phí trước thuế",
+                "ref": "context.P.RealPrice",
+                "sortable": true,
+                "className": "small-col-2 text-truncate text-right",
+                "headerClassName": "small-col-2 text-truncate text-right",
+                "render": "F.currency(P.RealPrice)"
               },
               {
                 "id": null,
@@ -234,11 +243,20 @@
               },
               {
                 "id": null,
-                "title": "Phiên bản",
+                "title": "Hiệu xe",
                 "ref": "HieuXe",
                 "sortable": true,
                 "className": "small-col-2 text-truncate text-center",
                 "headerClassName": "small-col-2 text-truncate text-center"
+              },
+              {
+                "id": null,
+                "title": "Phí trước thuế",
+                "ref": "context.P.RealPrice",
+                "sortable": true,
+                "className": "small-col-2 text-truncate text-right",
+                "headerClassName": "small-col-2 text-truncate text-right",
+                "render": "F.currency(P.RealPrice)"
               },
               {
                 "id": null,
@@ -353,11 +371,20 @@
               },
               {
                 "id": null,
-                "title": "Phiên bản",
+                "title": "Hiệu xe",
                 "ref": "HieuXe",
                 "sortable": true,
                 "className": "small-col-2 text-truncate text-center",
                 "headerClassName": "small-col-2 text-truncate text-center"
+              },
+              {
+                "id": null,
+                "title": "Phí trước thuế",
+                "ref": "context.P.RealPrice",
+                "sortable": true,
+                "className": "small-col-2 text-truncate text-right",
+                "headerClassName": "small-col-2 text-truncate text-right",
+                "render": "F.currency(P.RealPrice)"
               },
               {
                 "id": null,
@@ -502,11 +529,20 @@
               },
               {
                 "id": null,
-                "title": "Phiên bản",
+                "title": "Hiệu xe",
                 "ref": "HieuXe",
                 "sortable": true,
                 "className": "small-col-2 text-truncate text-center",
                 "headerClassName": "small-col-2 text-truncate text-center"
+              },
+              {
+                "id": null,
+                "title": "Phí trước thuế",
+                "ref": "context.P.RealPrice",
+                "sortable": true,
+                "className": "small-col-2 text-truncate text-right",
+                "headerClassName": "small-col-2 text-truncate text-right",
+                "render": "F.currency(P.RealPrice)"
               },
               {
                 "id": null,
@@ -548,6 +584,23 @@
     },
     "ExpGroup": {
       "Main": [
+        {
+          "DependOns": [
+            "loaiNam"
+          ],
+          "Condition": "!initExp",
+          "Exps": [
+            {
+              "Ref": "NamSanXuat",
+              "Exp": "''"
+            },
+            {
+              "Ref": "NamDangKyLanDau",
+              "Exp": "''"
+            }
+          ]
+        },
+        
         {
           "DependOns": [
             "NgayBatDau",
@@ -2569,26 +2622,31 @@
                     "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12"
                   },
                   "Items": [
-                    {
+                  {
                       "Type": "dropdown",
-                      "Ref": "HangXe",
-                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2)",
+                      "Ref": "MDSD",
                       "Options": {
-                        "Label": "Chọn hãng xe",
-                        "Title": "Hãng xe",
-                        "isClearable": "true"
+                        "Label": "Chọn mục đích sử dụng",
+                        "Title": "Mục đích sử dụng"
                       }
                     },
-                    {
+                  {
                       "Type": "dropdown",
-                      "Ref": "HieuXe",
-                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2)",
+                      "Ref": "NhomXe",
                       "Options": {
-                        "Label": "Chọn phiên bản",
-                        "Title": "Phiên bản"
+                        "Label": "Chọn nhóm xe",
+                        "Title": "Nhóm xe"
                       }
                     },
-                    {
+                  {
+                      "Type": "dropdown",
+                      "Ref": "LoaiXe",
+                      "Options": {
+                        "Label": "Chọn loại xe",
+                        "Title": "Loại xe"
+                      }
+                    },
+                  {
                       "Type": "dropdown",
                       "Ref": "DongXe",
                       "ReadOnly": "Q.HangXe != 'KHAC' && Q.HieuXe != 'KHAC'",
@@ -2598,31 +2656,27 @@
                         "Value": "Q.DongXe"
                       }
                     },
-                    {
+                  
+                  {
                       "Type": "dropdown",
-                      "Ref": "MDSD",
+                      "Ref": "HangXe",
+                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2)",
                       "Options": {
-                        "Label": "Chọn mục đích sử dụng",
-                        "Title": "Mục đích sử dụng"
+                        "Label": "Chọn hãng xe",
+                        "Title": "Hãng xe",
+                        "isClearable": "true"
                       }
                     },
-                    {
+                  {
                       "Type": "dropdown",
-                      "Ref": "NhomXe",
+                      "Ref": "HieuXe",
+                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2)",
                       "Options": {
-                        "Label": "Chọn nhóm xe",
-                        "Title": "Nhóm xe"
+                        "Label": "Chọn hiệu xe",
+                        "Title": "Hiệu xe"
                       }
                     },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "LoaiXe",
-                      "Options": {
-                        "Label": "Chọn loại xe",
-                        "Title": "Loại xe"
-                      }
-                    },
-                    {
+                  {
                       "Type": "dropdown",
                       "Ref": "NoiSanXuat",
                       "ReadOnly": "Q.isNewParticipant ? false : G.quoteType === 2",
@@ -2630,130 +2684,172 @@
                         "Label": "Chọn nơi sản xuất",
                         "Title": "Nơi sản xuất"
                       }
+                    }
+                  ]
+                },
+                {
+                    "Type": "formGroup",
+                    "Layout": true,
+                    "Hide": "Q.loaiNam == 'Năm đăng ký lần đầu'",
+                    "Options": {
+                      "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                      "SubLayout": true
                     },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "NamSanXuat",
-                      "ReadOnly": "Q.isNewParticipant ? false : G.quoteType === 2",
+                    "Items": [
+                      {
+                        "Type": "formGroup",
+                        "Layout": true,
+                        "Options": {
+                          "ClassName": "col-6",
+                          "SubLayout": true
+                        },
+                        "Items": [
+                          {
+                            "Type": "radio",
+                            "Ref": "loaiNam",
+                            "Disabled": "Q.isNewParticipant ? false : G.quoteType === 2",
+                            "Options": {
+                              "Label": "",
+                              "Title": "",
+                              "CheckedId": "NamSanXuat"
+                            }
+                          },
+                          {
+                            "Type": "dropdown",
+                            "ReadOnly": "Q.isNewParticipant ? false : G.quoteType === 2",
+                            "Ref": "NamSanXuat",
+                            "Options": {
+                              "Label": "Chọn năm sản xuất",
+                              "Title": "Năm sản xuất"
+                            }
+                          }
+                        ]
+                      }
+                      
+                    ]
+                },
+                {
+                      "Type": "formGroup",
+                      "Layout": true,
+                      "Hide": "Q.loaiNam == 'Năm sản xuất'",
                       "Options": {
-                        "Label": "Chọn năm sản xuất",
-                        "Title": "Năm sản xuất"
+                        "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                        "SubLayout": true
+                      },
+                      "Items": [
+                        {
+                          "Type": "formGroup",
+                          "Layout": true,
+                          "Options": {
+                            "ClassName": "col-6",
+                            "SubLayout": true
+                          },
+                          "Items": [
+                            {
+                              "Type": "radio",
+                              "Ref": "loaiNam",
+                              "Disabled": "Q.isNewParticipant ? false : G.quoteType === 2",
+                              "Options": {
+                                "Label": "",
+                                "Title": "",
+                                "CheckedId": "NamSanXuat"
+                              }
+                            },
+                            {
+                              "Type": "dropdown",
+                              "ReadOnly": "Q.isNewParticipant ? false : G.quoteType === 2",
+                              
+                              "Ref": "NamDangKyLanDau",
+                              "Options": {
+                                "Label": "Chọn năm đăng ký lần đầu",
+                                "Title": "Năm đăng ký lần đầu"
+                              }
+                            }
+                          ]
+                        }
+                        
+                      ]
+                    },
+                {
+                  "Type": "formGroup",
+                  "Layout": true,
+                  "Options": {
+                    "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                    "SubLayout": true
+                  },
+                  "Items": [
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriToiThieu",
+                        "Options": {
+                          "Label": "Nhập giá trị tối thiểu",
+                          "Title": "Giá trị tối thiểu",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriToiDa",
+                        "Options": {
+                          "Label": "Nhập giá trị tối đa",
+                          "Title": "Giá trị tối đa",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriXeKhachHangKhaiBao",
+                        "Options": {
+                          "Label": "Nhập giá trị xe KH khai báo",
+                          "Title": "Giá trị xe KH khai báo",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "checkBox",
+                        "Ref": "includeBatteryValue",
+                        "ReadOnly": "G.quoteType === 2",
+                        "Options": {
+                          "label": "Bao gồm giá trị pin",
+                          "Title": " "
+                        }
+                      }
+                  ]
+                },
+                
+                {
+                  "Type": "formGroup",
+                  "Layout": true,
+                  "Options": {
+                    "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12"
+                  },
+                  "Items": [
+                    {
+                      "Type": "number",
+                      "Ref": "SoChoNgoi",
+                      "Options": {
+                        "Label": "Số chỗ ngồi",
+                        "Title": "Số chỗ ngồi",
+                        "Type": "Integer"
                       }
                     },
                     {
-                      "Type": "formGroup",
-                      "Layout": true,
+                      "Type": "number",
+                      "Ref": "TrongTai",
+                      "ReadOnly": "Q.NhomXe == 'Nhóm xe chở người'",
                       "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
-                      },
-                      "Items": [
-                        {
-                          "Type": "display",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
-                          "Options": {
-                            "Label": "Giá trị xe tham khảo",
-                            "Title": "Giá trị xe tham khảo",
-                            "Value": "Q.GiaTriXeThamKhao",
-                            "Type": "Number"
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "Ref": "GiaTriXe",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
-                          "Options": {
-                            "Label": "Nhập giá trị xe thực tế",
-                            "Title": "Giá trị xe thực tế",
-                            "Type": "Integer"
-                          }
-                        }
-                      ]
+                        "Label": "Nhập trọng tải",
+                        "Title": "Trọng tải (tấn)"
+                      }
                     },
                     {
-                      "Type": "formGroup",
-                      "Layout": true,
+                      "Type": "text",
+                      "Ref": "text",
+                      "ReadOnly": "true",
                       "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
-                      },
-                      "Items": [
-                        {
-                          "Type": "checkBox",
-                          "Ref": "isElectricCar",
-                          "ReadOnly": "Q.isNewParticipant ? false : G.quoteType === 2",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "label": "Ô tô điện",
-                            "Title": " "
-                          }
-                        },
-                        {
-                          "Type": "checkBox",
-                          "Ref": "includeBatteryValue",
-                          "ReadOnly": "!Q.isElectricCar || G.quoteType === 2",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "label": "Bao gồm giá trị pin",
-                            "Title": " "
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "Ref": "MucTrachNhiem_Cover_XG_2_5_14",
-                          "ReadOnly": "!Q.includeBatteryValue",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "Label": "Giá trị pin",
-                            "Title": "Giá trị pin",
-                            "Type": "Integer"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "Type": "formGroup",
-                      "Layout": true,
-                      "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
-                      },
-                      "Items": [
-                        {
-                          "Type": "number",
-                          "Ref": "SoChoNgoi",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
-                          "Options": {
-                            "Label": "Số chỗ ngồi",
-                            "Title": "Số chỗ ngồi",
-                            "Type": "Integer"
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "Ref": "TrongTai",
-                          "ReadOnly": "Q.NhomXe == 'Nhóm xe chở người'",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
-                          "Options": {
-                            "Label": "Nhập trọng tải",
-                            "Title": "Trọng tải (tấn)"
-                          }
-                        }
-                      ]
+                        "Label": " ",
+                        "Title": " "
+                      }
                     },
                     {
                       "Type": "date",
@@ -2766,92 +2862,92 @@
                         "CanClear": true
                       }
                     },
-                    {
-                      "Type": "text",
-                      "Ref": "BienSoXe",
-                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2 ? (Q.canEditBienSoXe ? false : true) : (G.isNewVersion && OQ.BienSoXe))",
-                      "Options": {
-                        "Label": "Nhập biển kiểm soát",
-                        "Title": "Biển kiểm soát",
-                        "FilterSpecialCharacters": true,
-                        "UpperCase": true
-                      }
-                    },
-                    {
-                      "Type": "text",
-                      "Ref": "SoKhung",
-                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2 ? (Q.canEditSoKhung ? false : true) : (G.isNewVersion && OQ.SoKhung))",
-                      "Options": {
-                        "Label": "Nhập số khung",
-                        "Title": "Số khung",
-                        "FilterSpecialCharacters": true,
-                        "UpperCase": true
-                      }
-                    },
-                    {
-                      "Type": "text",
-                      "Ref": "SoMay",
-                      "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2 ? (Q.canEditSoMay ? false : true) : (G.isNewVersion && OQ.SoMay))",
-                      "Options": {
-                        "Label": "Nhập số máy",
-                        "Title": "Số máy",
-                        "FilterSpecialCharacters": true,
-                        "UpperCase": true
-                      }
-                    },
-                    {
-                      "Type": "radio",
-                      "Ref": "KieuGiayChungNhanBaoHiem",
-                      "Disabled": "R.path === 'quote/detail' || (R.path === 'quote/create' ? ((G.isNewVersion || G.isCopyQuote || Q.isRenew) ? false: (G.detailStatus !== 0 && G.detailStatus !== 1 && G.detailStatus !== 2)): (R.path === 'quote/policy-endorsement' ? true : false))",
-                      "Options": {
-                        "Label": "Kiểu giấy chứng nhận bảo hiểm",
-                        "Title": "Kiểu giấy chứng nhận bảo hiểm",
-                        "CheckedId": "TruyenThong"
-                      }
-                    },
-                    {
-                      "Type": "date",
-                      "Ref": "NgayBatDau",
-                      "Options": {
-                        "Label": "Ngày bắt đầu",
-                        "Title": "Ngày bắt đầu",
-                        "Format": "dd/MM/yyyy HH:mm",
-                        "showTimeSelect": true
-                      }
-                    },
-                    {
-                      "Type": "date",
-                      "Ref": "NgayKetThuc",
-                      "Options": {
-                        "Label": "Ngày kết thúc",
-                        "Title": "Ngày kết thúc",
-                        "Format": "dd/MM/yyyy HH:mm",
-                        "showTimeSelect": false,
-                        "MinDate": "Q.NgayBatDau"
-                      }
-                    },
-                    {
-                      "Type": "text",
-                      "Ref": "SoGCN",
-                      "ReadOnly": "!Q.KieuGiayChungNhanBaoHiem || Q.KieuGiayChungNhanBaoHiem === 'Điện tử'",
-                      "Options": {
-                        "Label": "Nhập số GCNBH",
-                        "Title": "Số GCNBH",
-                        "FilterSpecialCharacters": true,
-                        "Value": "Q.SoGCN"
-                      }
-                    },
-                    {
-                      "Type": "date",
-                      "Ref": "NgayCapGCN",
-                      "ReadOnly": "!Q.KieuGiayChungNhanBaoHiem || Q.KieuGiayChungNhanBaoHiem === 'Điện tử'",
-                      "Options": {
-                        "Label": "Chọn ngày cấp GCNBH",
-                        "Title": "Ngày cấp GCNBH",
-                        "Value": "Q.NgayCapGCN",
-                        "MaxDate": "Q.NgayBatDau"
-                      }
-                    }
+                {
+                  "Type": "text",
+                  "Ref": "BienSoXe",
+                  "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2 ? (Q.canEditBienSoXe ? false : true) : (G.isNewVersion && OQ.BienSoXe))",
+                  "Options": {
+                    "Label": "Nhập biển kiểm soát",
+                    "Title": "Biển kiểm soát",
+                    "FilterSpecialCharacters": true,
+                    "UpperCase": true
+                  }
+                },
+                {
+                  "Type": "text",
+                  "Ref": "SoKhung",
+                  "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2 ? (Q.canEditSoKhung ? false : true) : (G.isNewVersion && OQ.SoKhung))",
+                  "Options": {
+                    "Label": "Nhập số khung",
+                    "Title": "Số khung",
+                    "FilterSpecialCharacters": true,
+                    "UpperCase": true
+                  }
+                },
+                {
+                  "Type": "text",
+                  "Ref": "SoMay",
+                  "ReadOnly": "Q.isNewParticipant ? false : (G.quoteType === 2 ? (Q.canEditSoMay ? false : true) : (G.isNewVersion && OQ.SoMay))",
+                  "Options": {
+                    "Label": "Nhập số máy",
+                    "Title": "Số máy",
+                    "FilterSpecialCharacters": true,
+                    "UpperCase": true
+                  }
+                },
+                {
+                  "Type": "radio",
+                  "Ref": "KieuGiayChungNhanBaoHiem",
+                  "Disabled": "R.path === 'quote/detail' || (R.path === 'quote/create' ? ((G.isNewVersion || G.isCopyQuote || Q.isRenew) ? false: (G.detailStatus !== 0 && G.detailStatus !== 1 && G.detailStatus !== 2)): (R.path === 'quote/policy-endorsement' ? true : false))",
+                  "Options": {
+                    "Label": "Kiểu giấy chứng nhận bảo hiểm",
+                    "Title": "Kiểu giấy chứng nhận bảo hiểm",
+                    "CheckedId": "TruyenThong"
+                  }
+                },
+                {
+                  "Type": "date",
+                  "Ref": "NgayBatDau",
+                  "Options": {
+                    "Label": "Ngày bắt đầu",
+                    "Title": "Ngày bắt đầu",
+                    "Format": "dd/MM/yyyy HH:mm",
+                    "showTimeSelect": true
+                  }
+                },
+                {
+                  "Type": "date",
+                  "Ref": "NgayKetThuc",
+                  "Options": {
+                    "Label": "Ngày kết thúc",
+                    "Title": "Ngày kết thúc",
+                    "Format": "dd/MM/yyyy HH:mm",
+                    "showTimeSelect": false,
+                    "MinDate": "Q.NgayBatDau"
+                  }
+                },
+                {
+                  "Type": "text",
+                  "Ref": "SoGCN",
+                  "ReadOnly": "!Q.KieuGiayChungNhanBaoHiem || Q.KieuGiayChungNhanBaoHiem === 'Điện tử'",
+                  "Options": {
+                    "Label": "Nhập số GCNBH",
+                    "Title": "Số GCNBH",
+                    "FilterSpecialCharacters": true,
+                    "Value": "Q.SoGCN"
+                  }
+                },
+                {
+                  "Type": "date",
+                  "Ref": "NgayCapGCN",
+                  "ReadOnly": "!Q.KieuGiayChungNhanBaoHiem || Q.KieuGiayChungNhanBaoHiem === 'Điện tử'",
+                  "Options": {
+                    "Label": "Chọn ngày cấp GCNBH",
+                    "Title": "Ngày cấp GCNBH",
+                    "Value": "Q.NgayCapGCN",
+                    "MaxDate": "Q.NgayBatDau"
+                  }
+                }
                   ]
                 }
               ]
@@ -2879,22 +2975,6 @@
                       }
                     },
                     {
-                      "Type": "number",
-                      "Ref": "SoCongToMet",
-                      "Options": {
-                        "Label": "Nhập số công-tơ-mét",
-                        "Title": "Số công-tơ-mét"
-                      }
-                    },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "MauXe",
-                      "Options": {
-                        "Label": "Chọn màu xe",
-                        "Title": "Màu xe"
-                      }
-                    },
-                    {
                       "Type": "display",
                       "Options": {
                         "Title": "Kiểu hộp số",
@@ -2906,6 +2986,14 @@
                       "Options": {
                         "Title": "Dung tích",
                         "Value": "Q.DungTich"
+                      }
+                    },
+                    {
+                      "Type": "number",
+                      "Ref": "SoThamChieu",
+                      "Options": {
+                        "Label": "Nhập số tham chiếu",
+                        "Title": "Số tham chiếu"
                       }
                     }
                   ]
@@ -3117,11 +3205,19 @@
                     "Class": "text-right"
                   },
                   {
+                    "Label": "TLP chuẩn (sau thuế)",
+                    "Class": "text-right"
+                  },
+                  {
                     "Label": "Phí chuẩn (sau thuế)",
                     "Class": "text-right"
                   },
                   {
                     "Label": "Tỷ lệ giảm phí (%)",
+                    "Class": "text-right"
+                  },
+                  {
+                    "Label": "TLP thanh toán (sau thuế)",
                     "Class": "text-right"
                   },
                   {
@@ -3172,6 +3268,9 @@
                       "Type": "html"
                     },
                     {
+                      "Type": "html"
+                    },
+                    {
                       "Type": "display",
                       "Options": {
                         "Type": "Number",
@@ -3187,6 +3286,15 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
+                        "Value": "'0'",
+                        "Type": "Number",
+                        "Suffix": "%"
                       }
                     },
                     {
@@ -3252,6 +3360,12 @@
                       "Type": "html"
                     },
                     {
+                      "Type": "html"
+                    },
+                    {
+                      "Type": "html"
+                    },
+                    {
                       "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
@@ -3294,6 +3408,12 @@
                       "Type": "html"
                     },
                     {
+                      "Type": "html"
+                    },
+                    {
+                      "Type": "html"
+                    },
+                    {
                       "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
@@ -3328,6 +3448,12 @@
                         "Type": "Number",
                         "Value": "Q.MTNKhach_Cover_XG_2_1_3"
                       }
+                    },
+                    {
+                      "Type": "html"
+                    },
+                    {
+                      "Type": "html"
                     },
                     {
                       "Type": "html"
@@ -3387,6 +3513,12 @@
                       }
                     },
                     {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
                       "Type": "display",
                       "Options": {
                         "Label": "",
@@ -3398,6 +3530,12 @@
                       "Type": "html",
                       "Options": {
                         "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -3451,6 +3589,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "Q.Cover_XG_2_2_1 ? F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_2_1'),0) * (100 + F.getTax(Q.Tax_GroupCover_XG_2_2)) * F.lookupCondition('Tyle_NHDH'),2) :0",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_1.PriceWithTax",
                         "Type": "Number"
                       }
@@ -3464,6 +3611,18 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "!Q.Cover_XG_2_2_1",
+                      "Ref": "TLP_Cover_XG_2_2_1",
+                      "ErrorRef": "TLP_Cover_XG_2_2_1",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_2_1 != -999999 ? Q.TLP_Cover_XG_2_2_1 : (Q.SumInsured_Cover_XG_2_2_1 == 0? 0: F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_1.PriceWithDiscount*100/Q.SumInsured_Cover_XG_2_2_1,2) )",
+                        "Suffix": "%",
+                        "Min": 0,
+                        "Round": "2"
                       }
                     },
                     {
@@ -3539,6 +3698,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "Q.Cover_XG_2_2_2 ? F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_2_2'),0) * (100 + F.getTax(Q.Tax_GroupCover_XG_2_2)) * F.lookupCondition('Tyle_NHDH'),2):0",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_2.PriceWithTax",
                         "Type": "Number"
                       }
@@ -3551,6 +3719,18 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "!Q.Cover_XG_2_2_2",
+                      "Ref": "TLP_Cover_XG_2_2_2",
+                      "ErrorRef": "TLP_Cover_XG_2_2_2",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_2_2 != -999999 ? Q.TLP_Cover_XG_2_2_2 : (Q.SumInsured_Cover_XG_2_2_2 == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_2.PriceWithDiscount*100/Q.SumInsured_Cover_XG_2_2_2,2))",
+                        "Suffix": "%",
+                        "Min": 0,
+                        "Round": "2"
                       }
                     },
                     {
@@ -3627,6 +3807,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "Q.Cover_XG_2_2_3 ? F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_2_3'),0) * (100 + F.getTax(Q.Tax_GroupCover_XG_2_2)) * F.lookupCondition('Tyle_NHDH'),2):0",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_3.PriceWithTax",
                         "Type": "Number"
                       }
@@ -3639,6 +3828,18 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "!Q.Cover_XG_2_2_3",
+                      "Ref": "TLP_Cover_XG_2_2_3",
+                      "ErrorRef": "TLP_Cover_XG_2_2_3",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_2_3 != -999999 ? Q.TLP_Cover_XG_2_2_3 : (Q.SumInsured_Cover_XG_2_2_3 == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_3.PriceWithDiscount*100/Q.SumInsured_Cover_XG_2_2_3,2))",
+                        "Suffix": "%",
+                        "Min": 0,
+                        "Round": "2"
                       }
                     },
                     {
@@ -3712,6 +3913,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "Q.Cover_XG_2_3_4 ? F.round(0.005454545454545 * (100 + F.getTax(Q.Tax_GroupCover_XG_2_2)) * F.lookupCondition('Tyle_NHDH'),2):0",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_3_4.PriceWithTax",
                         "Type": "Number"
                       }
@@ -3724,6 +3934,18 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "!Q.Cover_XG_2_3_4",
+                      "Ref": "TLP_Cover_XG_2_3_4",
+                      "ErrorRef": "TLP_Cover_XG_2_3_4",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_3_4 != -999999 ? Q.TLP_Cover_XG_2_3_4 : ((Q.STBH_Cover_XG_2_3_4*Q.SoTanThamGia_Cover_XG_2_3_4) == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_3_4.PriceWithDiscount*100/(Q.STBH_Cover_XG_2_3_4*Q.SoTanThamGia_Cover_XG_2_3_4),2))",
+                        "Suffix": "%",
+                        "Min": 0,
+                        "Round": "2"
                       }
                     },
                     {
@@ -3784,6 +4006,18 @@
                       "Options": {
                         "Label": "",
                         "Type": "Integer"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
                       }
                     },
                     {
@@ -3866,6 +4100,18 @@
                     },
                     {
                       "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
                     {
@@ -3924,6 +4170,14 @@
                     {
                       "Type": "display",
                       "Options": {
+                        "Value": "(F.lookupCondition('TyLePhi') === 'KC' || Q.SoNguoiThamGia_GroupCover_XG_2_4 === 0) ? 0 : F.lookupCondition('TyLePhi')/Q.SoNguoiThamGia_GroupCover_XG_2_4 * F.lookupCondition('Tyle_NHDH') * (100 + F.getTax(Q.Tax_GroupCover_XG_2_4))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
                         "Value": "GC.GroupCover_XG_2_4.PriceWithTax",
                         "Type": "Number"
                       }
@@ -3938,6 +4192,18 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "!Q.GroupCover_XG_2_4",
+                      "Ref": "TLP_GroupCover_XG_2_4",
+                      "ErrorRef": "TLP_GroupCover_XG_2_4",
+                      "Options": {
+                        "Value": "Q.TLP_GroupCover_XG_2_4 != -999999 ? Q.TLP_GroupCover_XG_2_4 : ((Q.MucTrachNhiem_GroupCover_XG_2_4 * Q.SoNguoiThamGia_GroupCover_XG_2_4) == 0? 0:F.round(GC.GroupCover_XG_2_4.PriceWithDiscount*100/(Q.MucTrachNhiem_GroupCover_XG_2_4 * Q.SoNguoiThamGia_GroupCover_XG_2_4),2))",
+                        "Suffix": "%",
+                        "Min": 0,
+                        "Round": "2"
                       }
                     },
                     {
@@ -4020,6 +4286,18 @@
                     },
                     {
                       "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
                     {
@@ -4074,6 +4352,18 @@
                       "Type": "html",
                       "Options": {
                         "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4141,6 +4431,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0) == 0 ? '0':(F.round(((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13'))/F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0))*100,2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.PriceWithTax",
                         "Type": "Number"
                       }
@@ -4155,6 +4454,18 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "!Q.GroupCover_XG_2_5",
+                      "Ref": "TLP_GroupCover_XG_2_5",
+                      "ErrorRef": "TLP_GroupCover_XG_2_5",
+                      "Options": {
+                        "Value": "Q.TLP_GroupCover_XG_2_5 != -999999 ? Q.TLP_GroupCover_XG_2_5 : (Q.SumInsured_GroupCover_XG_2_5 == 0? 0:F.round((GC.GroupCover_XG_2_5.PriceWithDiscount- F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13'))*100/Q.SumInsured_GroupCover_XG_2_5,2))",
+                        "Suffix": "%",
+                        "Min": 0,
+                        "Round": "2"
                       }
                     },
                     {
@@ -4177,15 +4488,15 @@
                         "Exps": [
                           {
                             "Ref": "Discount_GroupCover_XG_2_5",
-                            "Exp": "G.endorsementType === 5 ? Q.Discount_GroupCover_XG_2_5 : (GC.GroupCover_XG_2_5.PriceWithTax - value)"
+                            "Exp": "G.endorsementType === 5 ? Q.Discount_GroupCover_XG_2_5 : ((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value)"
                           },
                           {
                             "Ref": "Discount_P_GroupCover_XG_2_5",
-                            "Exp": "GC.GroupCover_XG_2_5.PriceWithTax==0?0:F.round((GC.GroupCover_XG_2_5.PriceWithTax - value) *100 /GC.GroupCover_XG_2_5.PriceWithTax,10)"
+                            "Exp": "(GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13'))==0?0:F.round(((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value) *100 /(GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')),10)"
                           },
                           {
                             "Ref": "Terminal_GroupCover_XG_2_5",
-                            "Exp": "G.endorsementType !== 5 ? 0 : (GC.GroupCover_XG_2_5.PriceWithTax - value)"
+                            "Exp": "G.endorsementType !== 5 ? 0 : ((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value)"
                           }
                         ]
                       }
@@ -4234,8 +4545,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_1.Condition ? 0 : F.round(F.doubleVal(F.lookupCondition('TyLe_Cover_XG_2_5_1'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_1.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4293,8 +4619,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_3.Condition ? 0 : F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_3'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_3.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4352,8 +4693,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_4.Condition ? 0 :F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_4'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_4.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4411,8 +4767,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_5.Condition ? 0 : F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_5'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_5.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4470,8 +4841,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_6.Condition ? 0 :F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_6'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_6.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4529,8 +4915,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_7.Condition ? 0 : F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_7'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_7.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4602,6 +5003,18 @@
                     },
                     {
                       "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
                     {
@@ -4650,8 +5063,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_2.Condition ? 0 : F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_2'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_2.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4709,11 +5137,23 @@
                       }
                     },
                     {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
                       "Type": "display",
                       "Options": {
                         "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_9.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4772,8 +5212,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_10.Condition ? 0 : F.round(F.doubleVal(F.lookupCondition('TyLe_Cover_XG_2_5_10'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_10.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4832,8 +5287,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_11.Condition ? 0 :F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_11'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_11.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4895,8 +5365,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_12.Condition ? 0 : F.round(100*GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_12.PriceWithTax/Q.SumInsured_GroupCover_XG_2_5,2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "F.round(GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_12.PriceWithTax,0)",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -4958,8 +5443,100 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_8.Condition ? 0 :F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_8'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_8.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Hide": "Q.isRenew === false"
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    }
+                  ]
+                },
+                {
+                  "HasCheck": true,
+                  "CollapseTarget": "vcx",
+                  "SubCollapseTarget": "restConditions",
+                  "CheckRef": "Cover_XG_2_5_13",
+                  "Disabled": "false",
+                  "Hide": "F.checkHideCover('GroupCover_XG_2_5','Cover_XG_2_5_13')",
+                  "Items": [
+                    {
+                      "Type": "html",
+                      "Ref": "Cover_XG_2_5_13",
+                      "Options": {
+                        "Html": "Dịch vụ hỗ trợ trên đường"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
+                        "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_13.PriceWithTax",
+                        "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -5030,7 +5607,22 @@
                       "Options": {
                         "Label": "",
                         "Value": "0",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
+                        "Value": "0",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -5086,11 +5678,23 @@
                       }
                     },
                     {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
                       "Type": "dynamicHTML",
                       "Options": {
                         "Value": "P.PriceWithTax",
                         "Html": "<div class='text-right'><b>{value}</b></div>",
                         "Type": "Currency"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -5153,34 +5757,7 @@
                     "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12"
                   },
                   "Items": [
-                    {
-                      "Type": "dropdown",
-                      "Ref": "HangXe",
-                      "ReadOnly": "true",
-                      "Options": {
-                        "Label": "Chọn hãng xe",
-                        "Title": "Hãng xe"
-                      }
-                    },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "HieuXe",
-                      "ReadOnly": "true",
-                      "Options": {
-                        "Label": "Chọn phiên bản",
-                        "Title": "Phiên bản"
-                      }
-                    },
-                    {
-                      "Type": "display",
-                      "Ref": "DongXe",
-                      "Options": {
-                        "Label": "Chọn dòng xe",
-                        "Title": "Dòng xe",
-                        "Value": "Q.DongXe"
-                      }
-                    },
-                    {
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "true",
                       "Ref": "MDSD",
@@ -5189,7 +5766,7 @@
                         "Title": "Mục đích sử dụng"
                       }
                     },
-                    {
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "true",
                       "Ref": "NhomXe",
@@ -5198,7 +5775,7 @@
                         "Title": "Nhóm xe"
                       }
                     },
-                    {
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "true",
                       "Ref": "LoaiXe",
@@ -5207,7 +5784,35 @@
                         "Title": "Loại xe"
                       }
                     },
-                    {
+                  {
+                      "Type": "display",
+                      "Ref": "DongXe",
+                      "Options": {
+                        "Label": "Chọn dòng xe",
+                        "Title": "Dòng xe",
+                        "Value": "Q.DongXe"
+                      }
+                    },
+                    
+                  {
+                      "Type": "dropdown",
+                      "Ref": "HangXe",
+                      "ReadOnly": "true",
+                      "Options": {
+                        "Label": "Chọn hãng xe",
+                        "Title": "Hãng xe"
+                      }
+                    },
+                  {
+                      "Type": "dropdown",
+                      "Ref": "HieuXe",
+                      "ReadOnly": "true",
+                      "Options": {
+                        "Label": "Chọn hiệu xe",
+                        "Title": "Hiệu xe"
+                      }
+                    },
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "true",
                       "Ref": "NoiSanXuat",
@@ -5215,132 +5820,174 @@
                         "Label": "Chọn nơi sản xuất",
                         "Title": "Nơi sản xuất"
                       }
+                    }
+                  ]
+                },
+                {
+                    "Type": "formGroup",
+                    "Layout": true,
+                    "Hide": "Q.loaiNam == 'Năm đăng ký lần đầu'",
+                    "Options": {
+                      "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                      "SubLayout": true
                     },
-                    {
-                      "Type": "dropdown",
-                      "ReadOnly": "true",
-                      "Ref": "NamSanXuat",
-                      "Options": {
-                        "Label": "Chọn năm sản xuất",
-                        "Title": "Năm sản xuất"
+                    "Items": [
+                      {
+                        "Type": "formGroup",
+                        "Layout": true,
+                        "Options": {
+                          "ClassName": "col-6",
+                          "SubLayout": true
+                        },
+                        "Items": [
+                          {
+                            "Type": "radio",
+                            "Ref": "loaiNam",
+                            "Disabled": "true",
+                            "Options": {
+                              "Label": "",
+                              "Title": "",
+                              "CheckedId": "NamSanXuat"
+                            }
+                          },
+                          {
+                            "Type": "dropdown",
+                            "ReadOnly": "true",
+                            "Ref": "NamSanXuat",
+                            "Options": {
+                              "Label": "Chọn năm sản xuất",
+                              "Title": "Năm sản xuất"
+                            }
+                          }
+                        ]
                       }
-                    },
-                    {
+                      
+                    ]
+                },
+                {
                       "Type": "formGroup",
                       "Layout": true,
+                      "Hide": "Q.loaiNam == 'Năm sản xuất'",
                       "Options": {
-                        "ClassName": "col-6",
+                        "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
                         "SubLayout": true
                       },
                       "Items": [
                         {
-                          "Type": "display",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
+                          "Type": "formGroup",
+                          "Layout": true,
                           "Options": {
-                            "Label": "Giá trị xe tham khảo",
-                            "Title": "Giá trị xe tham khảo",
-                            "Value": "Q.GiaTriXeThamKhao",
-                            "Type": "Number"
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "Ref": "GiaTriXe",
-                          "ReadOnly": "true",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
+                            "ClassName": "col-6",
+                            "SubLayout": true
                           },
-                          "Options": {
-                            "Label": "Nhập giá trị xe thực tế",
-                            "Title": "Giá trị xe thực tế",
-                            "Type": "Integer"
-                          }
+                          "Items": [
+                            {
+                              "Type": "radio",
+                              "Ref": "loaiNam",
+                              "Disabled": "true",
+                              "Options": {
+                                "Label": "",
+                                "Title": "",
+                                "CheckedId": "NamSanXuat"
+                              }
+                            },
+                            {
+                              "Type": "dropdown",
+                              "ReadOnly": "true",
+                              "Ref": "NamDangKyLanDau",
+                              "Options": {
+                                "Label": "Chọn năm đăng ký lần đầu",
+                                "Title": "Năm đăng ký lần đầu"
+                              }
+                            }
+                          ]
                         }
+                        
                       ]
                     },
-                    {
-                      "Type": "formGroup",
-                      "Layout": true,
-                      "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
-                      },
-                      "Items": [
-                        {
-                          "Type": "checkBox",
-                          "Ref": "isElectricCar",
-                          "ReadOnly": "true",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "label": "Ô tô điện",
-                            "Title": " "
-                          }
-                        },
-                        {
-                          "Type": "checkBox",
-                          "Ref": "includeBatteryValue",
-                          "ReadOnly": "true",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "label": "Bao gồm giá trị pin",
-                            "Title": " "
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "Ref": "MucTrachNhiem_Cover_XG_2_5_14",
-                          "ReadOnly": "true",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "Label": "Giá trị pin",
-                            "Title": "Giá trị pin",
-                            "Type": "Integer"
-                          }
+                {
+                  "Type": "formGroup",
+                  "Layout": true,
+                  "Options": {
+                    "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                    "SubLayout": true
+                  },
+                  "Items": [
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriToiThieu",
+                        "ReadOnly": "true",
+                        "Options": {
+                          "Label": "Nhập giá trị tối thiểu",
+                          "Title": "Giá trị tối thiểu",
+                          "Type": "Integer"
                         }
-                      ]
-                    },
-                    {
-                      "Type": "formGroup",
-                      "Layout": true,
-                      "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
                       },
-                      "Items": [
-                        {
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriToiDa",
+                        "ReadOnly": "true",
+                        "Options": {
+                          "Label": "Nhập giá trị tối đa",
+                          "Title": "Giá trị tối đa",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriXeKhachHangKhaiBao",
+                        "ReadOnly": "true",
+                        "Options": {
+                          "Label": "Nhập giá trị xe KH khai báo",
+                          "Title": "Giá trị xe KH khai báo",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "checkBox",
+                        "Ref": "includeBatteryValue",
+                        "ReadOnly": "true",
+                        "Options": {
+                          "label": "Bao gồm giá trị pin",
+                          "Title": " "
+                        }
+                      }
+                  ]
+                },
+                {
+                  "Type": "formGroup",
+                  "Layout": true,
+                  "Options": {
+                    "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12"
+                  },
+                  "Items": [
+                    {
                           "Type": "number",
                           "ReadOnly": "true",
                           "Ref": "SoChoNgoi",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
                           "Options": {
                             "Label": "Số chỗ ngồi",
                             "Title": "Số chỗ ngồi",
                             "Type": "Integer"
                           }
                         },
-                        {
+                    {
                           "Type": "number",
                           "ReadOnly": "true",
                           "Ref": "TrongTai",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
                           "Options": {
                             "Label": "Nhập trọng tải",
                             "Title": "Trọng tải (tấn)"
                           }
-                        }
-                      ]
+                        },
+                    {
+                      "Type": "text",
+                      "Ref": "text",
+                      "ReadOnly": "true",
+                      "Options": {
+                        "Label": " ",
+                        "Title": " "
+                      }
                     },
                     {
                       "Type": "date",
@@ -5476,28 +6123,20 @@
                       }
                     },
                     {
-                      "Type": "dropdown",
-                      "ReadOnly": "true",
-                      "Ref": "MauXe",
-                      "Options": {
-                        "Label": "Chọn màu xe",
-                        "Title": "Màu xe"
-                      }
-                    },
-                    {
-                      "Type": "display",
-                      "ReadOnly": true,
-                      "Options": {
-                        "Title": "Kiểu hộp số",
-                        "Value": "Q.KieuHopSo"
-                      }
-                    },
-                    {
                       "Type": "display",
                       "ReadOnly": true,
                       "Options": {
                         "Title": "Dung tích",
                         "Value": "Q.DungTich"
+                      }
+                    },
+                    {
+                      "Type": "number",
+                      "Ref": "SoThamChieu",
+                      "ReadOnly": true,
+                      "Options": {
+                        "Label": "Nhập số tham chiếu",
+                        "Title": "Số tham chiếu"
                       }
                     }
                   ]
@@ -5707,11 +6346,19 @@
                     "Class": "text-right"
                   },
                   {
+                    "Label": "TLP chuẩn (sau thuế)",
+                    "Class": "text-right"
+                  },
+                  {
                     "Label": "Phí chuẩn (sau thuế)",
                     "Class": "text-right"
                   },
                   {
                     "Label": "Tỷ lệ giảm phí (%)",
+                    "Class": "text-right"
+                  },
+                  {
+                    "Label": "TLP thanh toán (sau thuế)",
                     "Class": "text-right"
                   },
                   {
@@ -5762,6 +6409,9 @@
                       "Type": "html"
                     },
                     {
+                      "Type": "html"
+                    },
+                    {
                       "Type": "display",
                       "Options": {
                         "Type": "Number",
@@ -5779,6 +6429,15 @@
                         "Suffix": "%",
                         "Max": 15,
                         "Min": 0
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
+                        "Value": "'0'",
+                        "Type": "Number",
+                        "Suffix": "%"
                       }
                     },
                     {
@@ -5825,6 +6484,12 @@
                       "Type": "html"
                     },
                     {
+                      "Type": "html"
+                    },
+                    {
+                      "Type": "html"
+                    },
+                    {
                       "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
@@ -5864,6 +6529,12 @@
                       "Type": "html"
                     },
                     {
+                      "Type": "html"
+                    },
+                    {
+                      "Type": "html"
+                    },
+                    {
                       "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
@@ -5898,6 +6569,12 @@
                         "Type": "Number",
                         "Value": "Q.MTNKhach_Cover_XG_2_1_3"
                       }
+                    },
+                    {
+                      "Type": "html"
+                    },
+                    {
+                      "Type": "html"
                     },
                     {
                       "Type": "html"
@@ -5952,6 +6629,12 @@
                       }
                     },
                     {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
                       "Type": "display",
                       "Options": {
                         "Label": "",
@@ -5963,6 +6646,12 @@
                       "Type": "html",
                       "Options": {
                         "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6017,6 +6706,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_2_1'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_2))*F.lookupCondition('Tyle_NHDH'),2)) + '%'",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_1.PriceWithTax",
                         "Type": "Number"
                       }
@@ -6029,6 +6727,17 @@
                         "Suffix": "%",
                         "Round": 2,
                         "Max": 100
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "true",
+                      "Ref": "TLP_Cover_XG_2_2_1",
+                      "ErrorRef": "TLP_Cover_XG_2_2_1",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_2_1 != -999999 ? Q.TLP_Cover_XG_2_2_1 : (Q.SumInsured_Cover_XG_2_2_1 == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_1.PriceWithDiscount*100/Q.SumInsured_Cover_XG_2_2_1,2))",
+                        "Suffix": "%",
+                        "Round": "2"
                       }
                     },
                     {
@@ -6098,6 +6807,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_2_2'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_2))*F.lookupCondition('Tyle_NHDH'),2)) + '%'",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_2.PriceWithTax",
                         "Type": "Number"
                       }
@@ -6110,6 +6828,17 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "true",
+                      "Ref": "TLP_Cover_XG_2_2_2",
+                      "ErrorRef": "TLP_Cover_XG_2_2_2",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_2_2 != -999999 ? Q.TLP_Cover_XG_2_2_2 : (Q.SumInsured_Cover_XG_2_2_2 == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_2.PriceWithDiscount*100/Q.SumInsured_Cover_XG_2_2_2,2))",
+                        "Suffix": "%",
+                        "Round": "2"
                       }
                     },
                     {
@@ -6180,6 +6909,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_2_3'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_2))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_3.PriceWithTax",
                         "Type": "Number"
                       }
@@ -6192,6 +6930,17 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "true",
+                      "Ref": "TLP_Cover_XG_2_2_3",
+                      "ErrorRef": "TLP_Cover_XG_2_2_3",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_2_3 != -999999 ? Q.TLP_Cover_XG_2_2_3 : (Q.SumInsured_Cover_XG_2_2_3 == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_2_3.PriceWithDiscount*100/Q.SumInsured_Cover_XG_2_2_3,2))",
+                        "Suffix": "%",
+                        "Round": "2"
                       }
                     },
                     {
@@ -6259,6 +7008,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "F.round(0.005454545454545*(100+F.getTax(Q.Tax_GroupCover_XG_2_2))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_2.Items.Cover_XG_2_3_4.PriceWithTax",
                         "Type": "Number"
                       }
@@ -6271,6 +7029,17 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "true",
+                      "Ref": "TLP_Cover_XG_2_3_4",
+                      "ErrorRef": "TLP_Cover_XG_2_3_4",
+                      "Options": {
+                        "Value": "Q.TLP_Cover_XG_2_3_4 != -999999 ? Q.TLP_Cover_XG_2_3_4 : ((Q.STBH_Cover_XG_2_3_4*Q.SoTanThamGia_Cover_XG_2_3_4) == 0? 0:F.round(GC.GroupCover_XG_2_2.Items.Cover_XG_2_3_4.PriceWithDiscount*100/(Q.STBH_Cover_XG_2_3_4*Q.SoTanThamGia_Cover_XG_2_3_4),2))",
+                        "Suffix": "%",
+                        "Round": "2"
                       }
                     },
                     {
@@ -6341,6 +7110,18 @@
                     {
                       "Type": "html",
                       "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
                         "Html": ""
                       }
                     },
@@ -6396,6 +7177,18 @@
                       "Type": "html",
                       "Options": {
                         "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6464,6 +7257,14 @@
                     {
                       "Type": "display",
                       "Options": {
+                        "Value": "(Q.MucTrachNhiem_GroupCover_XG_2_4 * Q.SoNguoiThamGia_GroupCover_XG_2_4) == 0 ? 0 : F.round(GC.GroupCover_XG_2_4.PriceWithTax*100/(Q.MucTrachNhiem_GroupCover_XG_2_4 * Q.SoNguoiThamGia_GroupCover_XG_2_4),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
                         "Value": "GC.GroupCover_XG_2_4.PriceWithTax",
                         "Type": "Number"
                       }
@@ -6478,6 +7279,17 @@
                         "Suffix": "%",
                         "Max": 100,
                         "Round": 2
+                      }
+                    },
+                    {
+                      "Type": "numberExp",
+                      "ReadOnly": "true",
+                      "Ref": "TLP_GroupCover_XG_2_4",
+                      "ErrorRef": "TLP_GroupCover_XG_2_4",
+                      "Options": {
+                        "Value": "Q.TLP_GroupCover_XG_2_4 != -999999 ? Q.TLP_GroupCover_XG_2_4 : ((Q.MucTrachNhiem_GroupCover_XG_2_4 * Q.SoNguoiThamGia_GroupCover_XG_2_4) == 0? 0:F.round(GC.GroupCover_XG_2_4.PriceWithDiscount*100/(Q.MucTrachNhiem_GroupCover_XG_2_4 * Q.SoNguoiThamGia_GroupCover_XG_2_4),2))",
+                        "Suffix": "%",
+                        "Round": "2"
                       }
                     },
                     {
@@ -6551,6 +7363,18 @@
                     {
                       "Type": "html",
                       "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
                         "Html": ""
                       }
                     },
@@ -6604,6 +7428,18 @@
                       "Type": "html",
                       "Options": {
                         "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6676,6 +7512,15 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0) == 0 ? '0':((F.round(((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13'))/F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0))*100,2)))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.PriceWithTax",
                         "Type": "Number"
                       }
@@ -6693,6 +7538,17 @@
                       }
                     },
                     {
+                      "Type": "numberExp",
+                      "ReadOnly": "true",
+                      "Ref": "TLP_GroupCover_XG_2_5",
+                      "ErrorRef": "TLP_GroupCover_XG_2_5",
+                      "Options": {
+                        "Value": "Q.TLP_GroupCover_XG_2_5 != -999999 ? Q.TLP_GroupCover_XG_2_5 : (Q.SumInsured_GroupCover_XG_2_5 == 0? 0:F.round((GC.GroupCover_XG_2_5.PriceWithDiscount- F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13'))*100/Q.SumInsured_GroupCover_XG_2_5,2))",
+                        "Suffix": "%",
+                        "Round": "2"
+                      }
+                    },
+                    {
                       "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
@@ -6705,11 +7561,11 @@
                         "Exps": [
                           {
                             "Ref": "Discount_GroupCover_XG_2_5",
-                            "Exp": "G.endorsementType === 5 ? Q.Discount_GroupCover_XG_2_5 : (GC.GroupCover_XG_2_5.PriceWithTax - value)"
+                            "Exp": "G.endorsementType === 5 ? Q.Discount_GroupCover_XG_2_5 : ((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value)"
                           },
                           {
                             "Ref": "Terminal_GroupCover_XG_2_5",
-                            "Exp": "G.endorsementType !== 5 ? 0 : (GC.GroupCover_XG_2_5.PriceWithTax - value)"
+                            "Exp": "G.endorsementType !== 5 ? 0 : ((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value)"
                           }
                         ]
                       }
@@ -6756,8 +7612,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_1.Condition ? 0 : (F.round(F.doubleVal(F.lookupCondition('TyLe_Cover_XG_2_5_1'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_1.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6815,8 +7686,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_3.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_3'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_3.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6874,8 +7760,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_4.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_4'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_4.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6933,8 +7834,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_5.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_5'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_5.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -6992,8 +7908,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_6.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_6'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_6.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7051,8 +7982,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_7.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_7'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_7.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7125,6 +8071,18 @@
                     },
                     {
                       "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
                       "Hide": "Q.isRenew === false"
                     },
                     {
@@ -7172,8 +8130,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_2.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_2'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_2.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7231,11 +8204,23 @@
                       }
                     },
                     {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
                       "Type": "display",
                       "Options": {
                         "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_9.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7294,8 +8279,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_10.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('TyLe_Cover_XG_2_5_10'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_10.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7354,8 +8354,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_11.Condition ? 0 :F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_11'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_11.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7417,8 +8432,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_12.Condition ? 0 :F.round(100*GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_12.PriceWithTax/Q.SumInsured_GroupCover_XG_2_5,2)",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "F.round(GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_12.PriceWithTax,0)",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7480,8 +8510,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "!GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_8.Condition ? 0 :(F.round(F.doubleVal(F.lookupCondition('Cover_XG_2_5_8'),0)*(100+F.getTax(Q.Tax_GroupCover_XG_2_5))*F.lookupCondition('Tyle_NHDH'),2))",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_8.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7508,6 +8553,82 @@
                     }
                   ],
                   "CollapseTarget": "vcx"
+                },
+                {
+                  "HasCheck": true,
+                  "CollapseTarget": "vcx",
+                  "SubCollapseTarget": "restConditions",
+                  "CheckRef": "Cover_XG_2_5_13",
+                  "Disabled": "false",
+                  "Hide": "F.checkHideCover('GroupCover_XG_2_5','Cover_XG_2_5_13')",
+                  "Items": [
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": "Dịch vụ hỗ trợ trên đường"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
+                        "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_13.PriceWithTax",
+                        "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Hide": "Q.isRenew === false"
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    }
+                  ]
                 },
                 {
                   "HasCheck": true,
@@ -7552,8 +8673,23 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
+                        "Value": "0",
+                        "Type": "Number",
+                        "Suffix": "%"
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
                         "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_14.PriceWithTax",
                         "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7608,11 +8744,23 @@
                       }
                     },
                     {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
                       "Type": "dynamicHTML",
                       "Options": {
                         "Value": "P.PriceWithTax",
                         "Html": "<div class='text-right'><b>{value}</b></div>",
                         "Type": "Currency"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
                       }
                     },
                     {
@@ -7675,35 +8823,7 @@
                     "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12"
                   },
                   "Items": [
-                    {
-                      "Type": "dropdown",
-                      "Ref": "HangXe",
-                      "ReadOnly": "Q.isNewParticipant ? false: !F.checkEndorsementField('HangXe')",
-                      "Options": {
-                        "Label": "Chọn hãng xe",
-                        "Title": "Hãng xe"
-                      }
-                    },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "HieuXe",
-                      "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('HieuXe')",
-                      "Options": {
-                        "Label": "Chọn phiên bản",
-                        "Title": "Phiên bản"
-                      }
-                    },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "DongXe",
-                      "ReadOnly": "Q.HangXe != 'KHAC' && Q.HieuXe != 'KHAC'",
-                      "Options": {
-                        "Label": "Chọn dòng xe",
-                        "Title": "Dòng xe",
-                        "Value": "Q.DongXe"
-                      }
-                    },
-                    {
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('MDSD')",
                       "Ref": "MDSD",
@@ -7712,7 +8832,7 @@
                         "Title": "Mục đích sử dụng"
                       }
                     },
-                    {
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('NhomXe')",
                       "Ref": "NhomXe",
@@ -7721,7 +8841,7 @@
                         "Title": "Nhóm xe"
                       }
                     },
-                    {
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('LoaiXe')",
                       "Ref": "LoaiXe",
@@ -7730,7 +8850,36 @@
                         "Title": "Loại xe"
                       }
                     },
-                    {
+                  {
+                    "Type": "dropdown",
+                    "Ref": "DongXe",
+                    "ReadOnly": "Q.HangXe != 'KHAC' && Q.HieuXe != 'KHAC'",
+                    "Options": {
+                      "Label": "Chọn dòng xe",
+                      "Title": "Dòng xe",
+                      "Value": "Q.DongXe"
+                    }
+                  },
+              
+                  {
+                      "Type": "dropdown",
+                      "Ref": "HangXe",
+                      "ReadOnly": "Q.isNewParticipant ? false: !F.checkEndorsementField('HangXe')",
+                      "Options": {
+                        "Label": "Chọn hãng xe",
+                        "Title": "Hãng xe"
+                      }
+                    },
+                  {
+                      "Type": "dropdown",
+                      "Ref": "HieuXe",
+                      "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('HieuXe')",
+                      "Options": {
+                        "Label": "Chọn hiệu xe",
+                        "Title": "Hiệu xe"
+                      }
+                    },
+                  {
                       "Type": "dropdown",
                       "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('NoiSanXuat')",
                       "Ref": "NoiSanXuat",
@@ -7738,110 +8887,148 @@
                         "Label": "Chọn nơi sản xuất",
                         "Title": "Nơi sản xuất"
                       }
+                    }
+                  ]
+                },
+                {
+                    "Type": "formGroup",
+                    "Layout": true,
+                    "Hide": "Q.loaiNam == 'Năm đăng ký lần đầu'",
+                    "Options": {
+                      "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                      "SubLayout": true
                     },
-                    {
-                      "Type": "dropdown",
-                      "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('NamSanXuat')",
-                      "Ref": "NamSanXuat",
-                      "Options": {
-                        "Label": "Chọn năm sản xuất",
-                        "Title": "Năm sản xuất"
+                    "Items": [
+                      {
+                        "Type": "formGroup",
+                        "Layout": true,
+                        "Options": {
+                          "ClassName": "col-6",
+                          "SubLayout": true
+                        },
+                        "Items": [
+                          {
+                            "Type": "radio",
+                            "Ref": "loaiNam",
+                            "Disabled": "Q.isNewParticipant ? false:!F.checkEndorsementField('loaiNam')",
+                            "Options": {
+                              "Label": "",
+                              "Title": "",
+                              "CheckedId": "NamSanXuat"
+                            }
+                          },
+                          {
+                            "Type": "dropdown",
+                            "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('NamSanXuat')",
+                            "Ref": "NamSanXuat",
+                            "Options": {
+                              "Label": "Chọn năm sản xuất",
+                              "Title": "Năm sản xuất"
+                            }
+                          }
+                        ]
                       }
-                    },
-                    {
+                      
+                    ]
+                },
+                {
                       "Type": "formGroup",
                       "Layout": true,
+                      "Hide": "Q.loaiNam == 'Năm sản xuất'",
                       "Options": {
-                        "ClassName": "col-6",
+                        "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
                         "SubLayout": true
                       },
                       "Items": [
                         {
-                          "Type": "number",
-                          "Disabled": "true",
-                          "Ref": "GiaTriXeThamKhao",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
-                          },
+                          "Type": "formGroup",
+                          "Layout": true,
                           "Options": {
-                            "Label": "Giá trị xe tham khảo",
-                            "Title": "Giá trị xe tham khảo",
-                            "Value": "Q.GiaTriXeThamKhao",
-                            "isEndorsementMoney": "true"
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('GiaTriXe')",
-                          "Ref": "GiaTriXe",
-                          "LayoutOptions": {
-                            "ClassName": "col-6"
+                            "ClassName": "col-6",
+                            "SubLayout": true
                           },
-                          "Options": {
-                            "Label": "Nhập giá trị xe thực tế",
-                            "Title": "Giá trị xe thực tế",
-                            "Type": "Integer",
-                            "isEndorsementMoney": "true"
-                          }
+                          "Items": [
+                            {
+                              "Type": "radio",
+                              "Ref": "loaiNam",
+                              "Disabled": "Q.isNewParticipant ? false:!F.checkEndorsementField('loaiNam')",
+                              "Options": {
+                                "Label": "",
+                                "Title": "",
+                                "CheckedId": "NamSanXuat"
+                              }
+                            },
+                            {
+                              "Type": "dropdown",
+                              "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('NamDangKyLanDau')",
+                              "Ref": "NamDangKyLanDau",
+                              "Options": {
+                                "Label": "Chọn năm đăng ký lần đầu",
+                                "Title": "Năm đăng ký lần đầu"
+                              }
+                            }
+                          ]
                         }
+                        
                       ]
                     },
-                    {
-                      "Type": "formGroup",
-                      "Layout": true,
-                      "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
-                      },
-                      "Items": [
-                        {
-                          "Type": "checkBox",
-                          "Ref": "isElectricCar",
-                          "ReadOnly": "Q.isNewParticipant ? false: !F.checkEndorsementField('XeDien')",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "label": "Ô tô điện",
-                            "Title": " "
-                          }
-                        },
-                        {
-                          "Type": "checkBox",
-                          "Ref": "includeBatteryValue",
-                          "ReadOnly": "!Q.isElectricCar || !F.checkEndorsementField('XeDien')",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "label": "Bao gồm giá trị pin",
-                            "Title": " "
-                          }
-                        },
-                        {
-                          "Type": "number",
-                          "Ref": "MucTrachNhiem_Cover_XG_2_5_14",
-                          "ReadOnly": "!Q.includeBatteryValue || !F.checkEndorsementField('XeDien')",
-                          "LayoutOptions": {
-                            "ClassName": "col-4"
-                          },
-                          "Options": {
-                            "Label": "Giá trị pin",
-                            "Title": "Giá trị pin",
-                            "Type": "Integer"
-                          }
+                {
+                  "Type": "formGroup",
+                  "Layout": true,
+                  "Options": {
+                    "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12",
+                    "SubLayout": true
+                  },
+                  "Items": [
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriToiThieu",
+                        "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('GiaTriToiThieu')",
+                        "Options": {
+                          "Label": "Nhập giá trị tối thiểu",
+                          "Title": "Giá trị tối thiểu",
+                          "Type": "Integer"
                         }
-                      ]
-                    },
-                    {
-                      "Type": "formGroup",
-                      "Layout": true,
-                      "Options": {
-                        "ClassName": "col-6",
-                        "SubLayout": true
                       },
-                      "Items": [
-                        {
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriToiDa",
+                        "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('GiaTriToiDa')",
+                        "Options": {
+                          "Label": "Nhập giá trị tối đa",
+                          "Title": "Giá trị tối đa",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "number",
+                        "Ref": "GiaTriXeKhachHangKhaiBao",
+                        "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('GiaTriXeKhachHangKhaiBao')",
+                        "Options": {
+                          "Label": "Nhập giá trị xe KH khai báo",
+                          "Title": "Giá trị xe KH khai báo",
+                          "Type": "Integer"
+                        }
+                      },
+                      {
+                        "Type": "checkBox",
+                        "Ref": "includeBatteryValue",
+                        "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('includeBatteryValue')",
+                        "Options": {
+                          "label": "Bao gồm giá trị pin",
+                          "Title": " "
+                        }
+                      }
+                  ]
+                },
+                {
+                  "Type": "formGroup",
+                  "Layout": true,
+                  "Options": {
+                    "ClassName": "col-xl-3 col-lg-3 col-md-6 col-12"
+                  },
+                  "Items": [
+                    {
                           "Type": "number",
                           "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('SoChoNgoi')",
                           "Ref": "SoChoNgoi",
@@ -7865,8 +9052,15 @@
                             "Label": "Nhập trọng tải",
                             "Title": "Trọng tải (tấn)"
                           }
-                        }
-                      ]
+                        },
+                    {
+                      "Type": "text",
+                      "Ref": "text",
+                      "ReadOnly": "true",
+                      "Options": {
+                        "Label": " ",
+                        "Title": " "
+                      }
                     },
                     {
                       "Type": "date",
@@ -7995,24 +9189,6 @@
                       }
                     },
                     {
-                      "Type": "number",
-                      "Ref": "SoCongToMet",
-                      "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('InfoXe')",
-                      "Options": {
-                        "Label": "Nhập số công-tơ-mét",
-                        "Title": "Số công-tơ-mét"
-                      }
-                    },
-                    {
-                      "Type": "dropdown",
-                      "Ref": "MauXe",
-                      "ReadOnly": "Q.isNewParticipant ? false:!F.checkEndorsementField('InfoXe')",
-                      "Options": {
-                        "Label": "Chọn màu xe",
-                        "Title": "Màu xe"
-                      }
-                    },
-                    {
                       "Type": "display",
                       "ReadOnly": true,
                       "Options": {
@@ -8026,6 +9202,15 @@
                       "Options": {
                         "Title": "Dung tích",
                         "Value": "Q.DungTich"
+                      }
+                    },
+                    {
+                      "Type": "number",
+                      "Ref": "SoThamChieu",
+                      "ReadOnly": true,
+                      "Options": {
+                        "Label": "Nhập số tham chiếu",
+                        "Title": "Số tham chiếu"
                       }
                     }
                   ]
@@ -9324,7 +10509,7 @@
                       "Type": "display",
                       "Options": {
                         "Label": "",
-                        "Value": "F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0) == 0 ? '0':((F.round((GC.GroupCover_XG_2_5.PriceWithTax/F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0))*100,2)))",
+                        "Value": "F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0) == 0 ? '0':((F.round(((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13'))/F.doubleVal(Q.SumInsured_GroupCover_XG_2_5,0))*100,2)))",
                         "Type": "Number",
                         "Suffix": "%"
                       }
@@ -9351,15 +10536,15 @@
                         "Exps": [
                           {
                             "Ref": "Discount_GroupCover_XG_2_5",
-                            "Exp": "G.endorsementType === 5 ? Q.Discount_GroupCover_XG_2_5 : (GC.GroupCover_XG_2_5.PriceWithTax - value)"
+                            "Exp": "G.endorsementType === 5 ? Q.Discount_GroupCover_XG_2_5 : ((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value)"
                           },
                           {
                             "Ref": "Discount_P_GroupCover_XG_2_5",
-                            "Exp": "F.round((GC.GroupCover_XG_2_5.PriceWithTax - value) *100 /GC.GroupCover_XG_2_5.PriceWithTax,10)"
+                            "Exp": "F.round(((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value) *100 / (GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')),10)"
                           },
                           {
                             "Ref": "Terminal_GroupCover_XG_2_5",
-                            "Exp": "G.endorsementType !== 5 ? 0 : (GC.GroupCover_XG_2_5.PriceWithTax - value)"
+                            "Exp": "G.endorsementType !== 5 ? 0 : ((GC.GroupCover_XG_2_5.PriceWithTax - F.lookupCondition('AfterTaxRSA_Cover_XG_2_5_13')) - value)"
                           }
                         ]
                       }
@@ -10322,6 +11507,79 @@
                     }
                   ],
                   "CollapseTarget": "vcx"
+                },
+                {
+                  "HasCheck": true,
+                  "CollapseTarget": "vcx",
+                  "CheckRef": "Cover_XG_2_5_13",
+                  "SubCollapseTarget": "restConditions",
+                  "Disabled": "false",
+                  "Hide": "F.checkHideCover('GroupCover_XG_2_5','Cover_XG_2_5_13')",
+                  "Items": [
+                    {
+                      "Type": "html",
+                      "Ref": "Cover_XG_2_5_13",
+                      "Options": {
+                        "Html": "Dịch vụ hỗ trợ trên đường"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Label": ""
+                      }
+                    },
+                    {
+                      "Type": "display",
+                      "Options": {
+                        "Label": "",
+                        "Value": "GC.GroupCover_XG_2_5.Items.Cover_XG_2_5_13.PriceWithTax",
+                        "Type": "Number"
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    },
+                    {
+                      "Type": "html",
+                      "Options": {
+                        "Html": ""
+                      }
+                    }
+                  ]
                 },
                 {
                   "HasCheck": true,
